@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\UppdController;
+use App\Models\Uppd;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
@@ -21,13 +23,24 @@ use Spatie\Permission\Models\Role;
 */
 
 //Proses Login User/Admin
+
+Route::get('/auth', function () {
+    return view('auth.loginoperator');});
+
+// Route::middleware(['guest:uppd'])->group(function () {
+
+//     Route::get('/auth', function () {
+//         return view('auth.loginoperator');
+//     })->name('login');
+//     Route::post('/login_operator', [AuthController::class, 'login_operator']);
+//     });
+
 Route::middleware(['guest:user'])->group(function () {
 
     Route::get('/', function () {
     return view('admin.login');
 })->name('login');
 Route::post('/login_proses', [AuthController::class, 'login_proses']);
-
 });
 
 Route::middleware(['auth:user'])->group(function () {
@@ -52,3 +65,4 @@ Route::post('/uppd/update', [UppdController::class, 'update']);
 Route::get('/uppd/{id_unit}/reset', [UppdController::class, 'reset']);
 
 });
+

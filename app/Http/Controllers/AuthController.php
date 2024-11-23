@@ -23,4 +23,12 @@ class AuthController extends Controller
         }
     }
 
+    // public function login_operator(Request $request){
+    //     if (Auth::guard('uppd')->attempt(['email' => $request->email, 'password' => $request->password])) {
+    //         return redirect('/admin/dashboard');
+    //     } else {
+    //         return redirect('/')->with(['warning' => 'ID / Password Salah']);
+    //     }
+    // }
+
 }
