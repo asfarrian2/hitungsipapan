@@ -44,6 +44,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'uppd' => [
+            'driver' => 'session',
+            'provider' => 'uppds',
+        ],
+
     ],
 
     /*
@@ -67,6 +72,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'uppds' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Uppd::class,
         ],
 
         // 'users' => [

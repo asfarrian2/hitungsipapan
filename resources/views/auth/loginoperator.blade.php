@@ -32,7 +32,7 @@
           <section class="login_content">
             <form action="/login_operator" method="post">
             @csrf
-              <h1>Silahkan Masuk</h1>
+              <h1>Login Operator</h1>
               @php
                     $messagewarning = Session::get('warning');
                 @endphp

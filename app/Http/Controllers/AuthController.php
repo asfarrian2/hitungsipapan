@@ -19,16 +19,24 @@ class AuthController extends Controller
     {
         if (Auth::guard('user')->check()) {
             Auth::guard('user')->logout();
-            return redirect('/');
+            return redirect('/panel');
         }
     }
 
-    // public function login_operator(Request $request){
-    //     if (Auth::guard('uppd')->attempt(['email' => $request->email, 'password' => $request->password])) {
-    //         return redirect('/admin/dashboard');
-    //     } else {
-    //         return redirect('/')->with(['warning' => 'ID / Password Salah']);
-    //     }
-    // }
+    public function login_operator(Request $request){
+        if (Auth::guard('uppd')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect('/operator/dashboard');
+        } else {
+            return redirect('/auth')->with(['warning' => 'ID / Password Salah']);
+        }
+    }
+
+    public function logout_operator()
+    {
+        if (Auth::guard('uppd')->check()) {
+            Auth::guard('uppd')->logout();
+            return redirect('/auth');
+        }
+    }
 
 }

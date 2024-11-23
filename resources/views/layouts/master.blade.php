@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="/gentella/images/favicon.ico" type="image/ico" />
+	<link href="https://pap.kalsel.site/assets/foto_profil/sipapan.ico" rel="shortcut icon">
 
     <title>Hitung SIPAPAN</title>
 
@@ -94,10 +94,10 @@
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <!-- <img src="/gentella/images/img.jpg" alt="">John Doe -->
+                    <img src="/gentella/images/user.png" alt="">{{ Auth::guard('user')->user()->name }}
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item"  href="javascript:;"> Profile</a>
+                    <a class="dropdown-item"  href="javascript:;"> Reset Password</a>
                     <a class="dropdown-item"  href="/proseslogout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </div>
                 </li>
@@ -116,7 +116,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Copyright &copy; 2025, Sistem Informasi Keuangan Balai Pelatihan Koperasi dan Usaha Kecil Prov. Kalsel by Pranata Komputer<a href="https://colorlib.com"></a>
+            Copyright &copy; 2024 BAPENDA<a href="https://colorlib.com"></a>
           </div>
           <div class="clearfix"></div>
         </footer>
