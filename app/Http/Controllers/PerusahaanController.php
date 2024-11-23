@@ -53,7 +53,7 @@ class PerusahaanController extends Controller
                 'kegiatan'  => $kegiatan,
                 'no_telp'   => $no_telp,
                 'email'     => $email,
-                'id_unit'      => $unit,
+                'id_unit'   => $unit,
                 'password'  => $password
             ];
             DB::table('tb_wp')->insert($data);
@@ -126,11 +126,8 @@ class PerusahaanController extends Controller
 
     public function reset($id_wajibpajak)
     {
-
         $data =  [
-
             'password'   => Hash::make('12345')
-
         ];
 
        $update = DB::table('tb_wp')

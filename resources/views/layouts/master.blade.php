@@ -44,7 +44,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-calculator"></i> <span>HITUNG-SIPAPAN</span></a>
+              <a href="index.html" class="site_title"><span>HITUNG-SIPAPAN</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -62,37 +62,14 @@
                     <ul class="nav child_menu">
                       <li><a href="/uppd/view">UPPD</a></li>
                       <li><a href="/perusahaan/view">Perusahaan</a></li>
-                      <li><a href="/penyedia/view">Penyedia</a></li>
-                      <li><a href="/user/view">User</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-database"></i> Anggaran <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">Progam</a></li>
-                      <li><a href="form_advanced.html">Kegiatan</a></li>
-                      <li><a href="form_validation.html">Sub Kegiatan</a></li>
                     </ul>
                   </li>
                   <br> <h3>Monitoring</h3> <br>
-                  <li><a href="index.html"><i class="fa fa-line-chart"></i> SPJ</a></li>
-                  <br> <h3>TRANSAKSI</h3> <br>
-                  <li><a><i class="fa fa-credit-card"></i> KEUANGAN <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                    <li><a href="tables_dynamic.html">SPP SPM LS</a></li>
-                      <li><a href="tables.html">Uang Pelimpahan (UP)</a></li>
-                      <li><a href="tables_dynamic.html">Belanja</a></li>
-                      <li><a href="tables.html">Pajak</a></li>
-                    </ul>
-                  </li>
+                  <li><a href="index.html"><i class="fa fa-line-chart"></i> Cek Pajak</a></li>
                   <br> <h3>OUTPUT</h3> <br>
                   <li><a><i class="fa fa-book"></i> LAPORAN<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    <li><a href="chartjs.html">Belanja Langsung (LS)</a></li>
-                      <li><a href="chartjs.html">Uang Pelimpahan (UP)</a></li>
-                      <li><a href="chartjs2.html">Buku Kas Umum</a></li>
-                      <li><a href="morisjs.html">SPJ Fungsional</a></li>
-                      <li><a href="echarts.html">Pajak</a></li>
-                      <li><a href="other_charts.html">Fisik</a></li>
+                      <li><a href="chartjs.html">Rekap Cek PAP</a></li>
                     </ul>
                   </li>
                 </ul>
