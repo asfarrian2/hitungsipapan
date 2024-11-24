@@ -17,7 +17,9 @@ class Authenticate extends Middleware
         if (!$request->expectsJson()) {
             if (request()->is('panel/*')) {
                 return route('loginadmin');
-            } else {
+            } if (request()->is('login_wp/*')) {
+                return route('loginwp');
+            }else {
                 return route('login');
             }
         }

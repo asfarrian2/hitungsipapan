@@ -11,7 +11,7 @@ class AuthController extends Controller
         if (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect('/admin/dashboard');
         } else {
-            return redirect('/')->with(['warning' => 'ID / Password Salah']);
+            return redirect('/')->with(['warning' => 'Email / Password Salah']);
         }
     }
 
@@ -27,7 +27,7 @@ class AuthController extends Controller
         if (Auth::guard('uppd')->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect('/operator/dashboard');
         } else {
-            return redirect('/auth')->with(['warning' => 'ID / Password Salah']);
+            return redirect('/auth')->with(['warning' => 'Email / Password Salah']);
         }
     }
 
@@ -36,6 +36,22 @@ class AuthController extends Controller
         if (Auth::guard('uppd')->check()) {
             Auth::guard('uppd')->logout();
             return redirect('/auth');
+        }
+    }
+
+    public function proses_login_wp(Request $request){
+        if (Auth::guard('wp')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect('/wp/home');
+        } else {
+            return redirect('/auth_wp')->with(['warning' => 'Email / Password Salah']);
+        }
+    }
+
+    public function logout_wp()
+    {
+        if (Auth::guard('wp')->check()) {
+            Auth::guard('wp')->logout();
+            return redirect('/');
         }
     }
 

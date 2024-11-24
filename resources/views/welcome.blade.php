@@ -28,6 +28,7 @@
 
         <!-- Template Stylesheet -->
         <link href="/wp/css/style.css" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="/wp/img/logoutama.png">
     </head>
 
     <body>
@@ -56,10 +57,42 @@
                         <a href="index.html" class="nav-item nav-link">HOME</a>
                     </div>
                     <!-- <a href="#" class="btn btn-light border border-primary rounded-pill text-primary py-2 px-4 me-4">Log In</a> -->
-                    <a href="#" class="btn btn-warning rounded-pill text-white py-2 px-4">LOGIN</a>
+                    <button id="myBtn" class="btn btn-warning rounded-pill text-white py-2 px-4">MASUK</button>
                 </div>
             </nav>
+ <!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Silahkan Login</h4>
+        <button type="button" class="btn-close close" data-bs-dismiss="modal"></button>
+      </div>
+      <form action="/proses_login_wp" method="post">
+      @csrf
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input type="email" name="email" class="form-control" required="required" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Password:</label>
+            <input type="password" name="password" class="form-control" required="required" id="message-text"></input>
+          </div>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-warning">LOGIN</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
             <div class="hero-header overflow-hidden px-5">
                 <div class="rotate-img">
                     <img src="/wp/img/sty-1.png" class="img-fluid w-100" alt="">
@@ -69,7 +102,7 @@
                     <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
                         <h1 class="display-4 text-dark mb-4 wow fadeInUp" data-wow-delay="0.3s">HITUNG SIPAPAN</h1>
                         <p class="fs-4 mb-4 wow fadeInUp" data-wow-delay="0.5s">Cek dan Hitung Pajak Air Permukaan Perusahaan Anda Secara Otomatis Disini</p>
-                        <a href="#" class="btn btn-warning rounded-pill py-3 px-5 wow fadeInUp" data-wow-delay="0.7s">HITUNG PAP SEKARANG</a>
+                        <a href="/auth_wp" class="btn btn-warning rounded-pill py-3 px-5 wow fadeInUp" data-wow-delay="0.7s">HITUNG PAP SEKARANG</a>
                     </div>
                     <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
                         <img src="/wp/img/hero-img-1.png" class="img-fluid w-100 h-100" alt="">
@@ -85,13 +118,7 @@
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-start mb-md-0">
-                        <span class="text-white"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end text-white">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        <span class="text-white"><i class="fas fa-copyright text-light me-2"></i>2024 BAPENDA PROVINSI KALIMANTAN SELATAN</span>
                     </div>
                 </div>
             </div>
@@ -112,10 +139,38 @@
     <script src="/wp/lib/counterup/counterup.min.js"></script>
     <script src="/wp/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="/wp/lib/lightbox/js/lightbox.min.js"></script>
-
-
     <!-- Template Javascript -->
     <script src="/wp/js/main.js"></script>
+
+    <script>
+        // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+    </script>
+
     </body>
 
 </html>

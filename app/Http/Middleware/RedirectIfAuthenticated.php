@@ -29,6 +29,10 @@ class RedirectIfAuthenticated
             if (Auth::guard('user')->check()) {
                 return redirect(RouteServiceProvider::HOMEADMIN);
             }
+
+            if (Auth::guard('wp')->check()) {
+                return redirect(RouteServiceProvider::HOMEWP);
+            }
         }
 
         return $next($request);

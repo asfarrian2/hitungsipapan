@@ -16,4 +16,10 @@ class DashboardController extends Controller
     {
         return view('operator.dashboard');
     }
+
+    public function home()
+    {
+        return view('home');
+    }
+
 }

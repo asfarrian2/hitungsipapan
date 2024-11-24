@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'uppds',
         ],
+        'wp' => [
+            'driver' => 'session',
+            'provider' => 'wps',
+        ],
 
     ],
 
@@ -77,6 +81,10 @@ return [
         'uppds' => [
             'driver' => 'eloquent',
             'model' => App\Models\Uppd::class,
+        ],
+        'wps' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Wp::class,
         ],
 
         // 'users' => [

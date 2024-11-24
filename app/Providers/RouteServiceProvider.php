@@ -19,6 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOMEADMIN = '/admin/dashboard';
     public const HOME = '/operator/dashboard';
+    public const HOMEWP = '/wp/home';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

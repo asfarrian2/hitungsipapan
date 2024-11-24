@@ -7,6 +7,7 @@ use App\Http\Controllers\WpController;
 use App\Http\Controllers\UppdController;
 use App\Models\Uppd;
 use App\Models\User;
+use App\Models\wp;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
@@ -34,9 +35,9 @@ Route::middleware(['guest:user'])->group(function () {
     return view('admin.login');
 })->name('loginadmin');
 Route::post('/login_proses', [AuthController::class, 'login_proses']);
-    });
+});
 
-Route::middleware(['auth:user'])->group(function () {
+Route::middleware(['role:admin hitungpajakpap,user'])->group(function () {
 
 Route::get('/admin/dashboard', [DashboardController::class, 'dashboard']);
 Route::get('/proseslogout', [AuthController::class, 'proseslogout']);
@@ -79,4 +80,48 @@ Route::middleware(['auth:uppd'])->group(function () {
     Route::get('/operator/wp/{id_wajibpajak}/edit', [WpController::class, 'edit']);
     Route::post('/operator/wp/update', [WpController::class, 'update']);
     Route::get('/operator/wp/{id_wajibpajak}/reset', [WpController::class, 'reset']);
+});
+
+
+Route::middleware(['guest:wp'])->group(function () {
+
+    Route::get('/login_wp', function () {
+    return view('auth.loginwp');
+})->name('loginwp');
+Route::get('/auth_wp', function () {
+    return view('auth.loginwp');
+})->name('loginwp');
+Route::post('/proses_login_wp', [AuthController::class, 'proses_login_wp']);
+});
+
+Route::middleware(['auth:wp'])->group(function () {
+Route::get('/wp/home', [DashboardController::class, 'home']);
+Route::get('/logout_wp', [AuthController::class, 'logout_wp']);
+});
+
+Route::get('/auth_wp', function () {
+    return view('auth.loginwp');});
+
+
+Route::get('/createrolepermission', function () {
+
+    try {
+        Role::create(['name' => 'admin hitungpajakpap']);
+        Permission::create(['name' => 'view-perusahaan']);
+        Permission::create(['name' => 'view-uppd']);
+        echo "Sukses";
+    } catch (\Exception $e) {
+        echo "Error";
+    }
+});
+
+Route::get('/give-user-role', function () {
+    try {
+        $user = User::findorfail(1);
+        $user->assignRole('admin hitungpajakpap');
+        echo "Sukses";
+    } catch (\Exception $e) {
+        //throw $th;
+        echo "Error";
+    }
 });

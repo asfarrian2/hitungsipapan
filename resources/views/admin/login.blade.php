@@ -20,6 +20,7 @@
 
     <!-- Custom Theme Style -->
     <link href="/gentella/build/css/custom.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/wp/img/logoutama.png">
   </head>
 
   <body class="login">
