@@ -6,6 +6,7 @@ use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\WpController;
 use App\Http\Controllers\WpapController;
 use App\Http\Controllers\UppdController;
+use App\Http\Controllers\ObjekController;
 use App\Models\Uppd;
 use App\Models\User;
 use App\Models\wp;
@@ -71,6 +72,7 @@ Route::middleware(['auth:uppd'])->group(function () {
 
     Route::get('/operator/dashboard', [DashboardController::class, 'dashboard_operator']);
     Route::get('/logout_operator', [AuthController::class, 'logout_operator']);
+    //Data Perusahaan/PAP
     Route::get('/operator/wp/view', [WpController::class, 'view']);
     Route::get('/operator/wp/create', [WpController::class, 'create']);
     Route::post('/operator/wp/store', [WpController::class, 'store']);
@@ -78,9 +80,21 @@ Route::middleware(['auth:uppd'])->group(function () {
     Route::get('/operator/wp/{id_wajibpajak}/edit', [WpController::class, 'edit']);
     Route::post('/operator/wp/update', [WpController::class, 'update']);
     Route::get('/operator/wp/{id_wajibpajak}/reset', [WpController::class, 'reset']);
+    //Data Objek Pajak
+    Route::get('/operator/objek/{id_wajibpajak}/detail', [ObjekController::class, 'detail']);
+    Route::post('/operator/objek/store', [ObjekController::class, 'store']);
+    Route::get('/operator/objek/{id_objek}/hapus', [ObjekController::class, 'hapus']);
+    Route::get('/operator/objek/{id_objek}/edit', [ObjekController::class, 'edit']);
+    Route::post('/operator/objek/update', [ObjekController::class, 'update']);
+
 });
 
 
+
+
+
+
+//akun wp
 Route::middleware(['guest:wp'])->group(function () {
     Route::get('/', function () {
         return view('welcome');});

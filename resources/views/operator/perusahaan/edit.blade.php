@@ -37,7 +37,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">ID
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="id_wajibpajak_baru" value="{{ $perusahaan->id_wajibpajak }}" id="first-name" required="required" class="form-control ">
+												<input type="text" maxlength="10" name="id_wajibpajak_baru" value="{{ $perusahaan->id_wajibpajak }}" id="first-name" required="required" class="form-control ">
 											</div>
 										</div>
                                         <div class="item form-group">
@@ -75,11 +75,8 @@
 												<input type="text" name="email" value="{{ $perusahaan->email }}" id="first-name"  class="form-control ">
 											</div>
 										</div>
-                                        <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">UPPD
-											</label>
 											<div class="col-md-6 col-sm-6 ">
-                                            <select name="unit" id="unit" class="form-control">
+                                            <select name="unit" id="unit" class="form-control" hidden>
                                             <option value="">Pilih Unit Penagihan</option>
                                                 @foreach ($uppd as $d)
                                                     <option {{ $perusahaan->id_unit == $d->id_unit ? 'selected' : '' }}
@@ -87,7 +84,7 @@
                                                 @endforeach
                                             </select>
 											</div>
-										</div>
+
 										<div class="ln_solid"></div>
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">

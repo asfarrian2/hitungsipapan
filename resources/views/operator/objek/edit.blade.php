@@ -12,7 +12,7 @@
 @endif
           <div class="page-title">
             <div class="title_left">
-              <h3>Wajib Pajak</h3>
+              <h3>Objek Pajak</h3>
             </div>
         </div>
         <!-- forminput -->
@@ -21,53 +21,35 @@
 						<div class="col-md-12 col-sm-12 ">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Tambah Data</h2>
+									<h2>Edit Data</h2>
 									<div class="clearfix"></div>
 								</div>
 								<div class="x_content">
 									<br />
-									<form action="/operator/wp/store" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+									<form action="/operator/objek/update" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                                         @csrf
                                         <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">ID Wajib Pajak
+											<div class="col-md-6 col-sm-6 ">
+												<input type="hidden" name="id_wajibpajak" value="{{ $objek_pajak->id_wajibpajak }}" id="first-name"  class="form-control ">
+											</div>
+										</div>
+                                        <div class="item form-group">
+											<div class="col-md-6 col-sm-6 ">
+												<input type="hidden" name="id_objek" value="{{ $objek_pajak->id_objek }}" id="first-name"  class="form-control ">
+											</div>
+										</div>
+                                        <div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Wajib Pajak
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="id_wajibpajak" maxlength="10" id="first-name" required="required" class="form-control ">
+												<input readonly type="text" name="id_unit" value="{{$objek_pajak->nama}}" id="first-name" required="required" class="form-control ">
 											</div>
 										</div>
                                         <div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nama
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="nama" id="first-name" required="required" class="form-control ">
-											</div>
-										</div>
-                                        <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Alamat
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="alamat" id="first-name" required="required" class="form-control ">
-											</div>
-										</div>
-                                        <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Kegiatan Usaha
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="kegiatan" id="first-name" required="required" class="form-control ">
-											</div>
-										</div>
-                                        <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">No. Telepon
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="number" name="no_telp" id="first-name"  class="form-control " required="required">
-											</div>
-										</div>
-                                        <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Email
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="email" id="first-name"  class="form-control " required="required">
+												<input type="text" name="nama_objek" value="{{ $objek_pajak->nama_objek }}" id="first-name" required="required" class="form-control ">
 											</div>
 										</div>
 										<div class="ln_solid"></div>

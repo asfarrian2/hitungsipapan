@@ -61,7 +61,7 @@
                           @csrf
                           <td>
                             <a href="/operator/wp/{{ $d->id_wajibpajak }}/edit" title="Edit Data"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>
-                            <a href="/operator/wp/{{ $d->id_wajibpajak }}/detail" title="Detail"><i class="fa fa-eye text-succsess btn btn-success btn-sm" ></i></a>
+                            <a href="/operator/objek/{{ $d->id_wajibpajak }}/detail" title="Detail"><i class="fa fa-eye text-succsess btn btn-success btn-sm" ></i></a>
                             <a class="reset" href="#" data-id="{{ $d->id_wajibpajak }}" title="Reset password"><i class="reset fa fa-refresh text-succsess btn btn-primary btn-sm" ></i></a>
                             <a class="hapus" href="#" data-id="{{ $d->id_wajibpajak }}" title="Hapus Data"><i class="hapus fa fa-trash text-succsess btn btn-danger btn-sm" ></i></a>
                           </td>

@@ -7,14 +7,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class WpController extends Controller
 {
     public function view(){
+        $id_unit = Auth::guard('uppd')->user()->id_unit;
         $perusahaan = DB::table('tb_wp')
         ->join('tb_uppd', 'tb_wp.id_unit', '=', 'tb_uppd.id_unit')
         ->select('tb_wp.*', 'tb_uppd.nama_unit')
+        ->where('tb_wp.id_unit',$id_unit)
         ->get();
 
         return view ('operator.perusahaan.view', compact('perusahaan'));
@@ -35,7 +38,7 @@ class WpController extends Controller
         $kegiatan = $request->kegiatan;
         $no_telp  = $request->no_telp;
         $email    = $request->email;
-        $unit     = $request->unit;
+        $id_unit = Auth::guard('uppd')->user()->id_unit;
         $password = Hash::make('12345');
 
         $cekkode = DB::table('tb_wp')
@@ -53,7 +56,7 @@ class WpController extends Controller
                 'kegiatan'  => $kegiatan,
                 'no_telp'   => $no_telp,
                 'email'     => $email,
-                'id_unit'   => $unit,
+                'id_unit'   => $id_unit,
                 'password'  => $password
             ];
             DB::table('tb_wp')->insert($data);
