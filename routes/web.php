@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\WpController;
+use App\Http\Controllers\WpapController;
 use App\Http\Controllers\UppdController;
 use App\Models\Uppd;
 use App\Models\User;
@@ -25,9 +26,6 @@ use Spatie\Permission\Models\Role;
 */
 
 //Proses Login User/Admin
-
-Route::get('/', function () {
-    return view('welcome');});
 
 Route::middleware(['guest:user'])->group(function () {
 
@@ -84,6 +82,8 @@ Route::middleware(['auth:uppd'])->group(function () {
 
 
 Route::middleware(['guest:wp'])->group(function () {
+    Route::get('/', function () {
+        return view('welcome');});
 
     Route::get('/login_wp', function () {
     return view('auth.loginwp');
@@ -96,11 +96,18 @@ Route::post('/proses_login_wp', [AuthController::class, 'proses_login_wp']);
 
 Route::middleware(['auth:wp'])->group(function () {
 Route::get('/wp/home', [DashboardController::class, 'home']);
+Route::get('/wp/hitungpap', [WpapController::class, 'create']);
+Route::get('/wp/store', [WpapController::class, 'store']);
 Route::get('/logout_wp', [AuthController::class, 'logout_wp']);
 });
 
 Route::get('/auth_wp', function () {
     return view('auth.loginwp');});
+
+
+
+
+
 
 
 Route::get('/createrolepermission', function () {
