@@ -123,24 +123,7 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
-    <script>
-    Webcam.set({
-        height: 480,
-        width: 640,
-        image_format: 'jpeg',
-        jpeg_quality: 80
-    });
-
-    Webcam.attach('.webcam-capture');
-
-    $("#hitung").click(function(e) {
-            Webcam.snap(function(uri) {
-                image = uri;
-    });
-    });
-
-    </script>
-    @stack('myscript')
+    @stack('wpscript')
     <script src="/gentella/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="/gentella/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

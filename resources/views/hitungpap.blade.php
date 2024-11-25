@@ -56,7 +56,7 @@
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<button type="submit" id="hitung" class="btn btn-success">Hitung</button>
-                                                <a href="/wp/hitungpap" class="btn btn-dark">Batal</a>
+                                                <a href="/wp/home" class="btn btn-dark">Batal</a>
 											</div>
 										</div>
 									</form>
@@ -69,3 +69,23 @@
             </div>
 
 @endsection
+
+@push('wpscript')
+<script>
+    Webcam.set({
+        height: 480,
+        width: 640,
+        image_format: 'jpeg',
+        jpeg_quality: 80
+    });
+
+    Webcam.attach('.webcam-capture');
+
+    $("#hitung").click(function(e) {
+            Webcam.snap(function(uri) {
+                image = uri;
+    });
+    });
+
+    </script>
+@endpush
