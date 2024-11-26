@@ -71,6 +71,8 @@
                     <ul class="nav child_menu">
                       <li><a href="/sa/view">SA</a></li>
                       <li><a href="/la/view">LA</a></li>
+                      <li><a href="/lp/view">LP</a></li>
+                      <li><a href="/va/view">VA</a></li>
                     </ul>
                   </li>
                   <li><a href="/fkpap/view"><i class="fa fa-institution"></i> FKPAP</a></li>

@@ -10,6 +10,9 @@ use App\Http\Controllers\ObjekController;
 use App\Http\Controllers\HdapController;
 use App\Http\Controllers\FewController;
 use App\Http\Controllers\FnapController;
+use App\Http\Controllers\LaController;
+use App\Http\Controllers\LpController;
+use App\Http\Controllers\VaController;
 use App\Models\Uppd;
 use App\Models\User;
 use App\Models\wp;
@@ -71,13 +74,30 @@ Route::post('/few/store', [FewController::class, 'store']);
 Route::get('/few/{id_few}/hapus', [FewController::class, 'hapus']);
 Route::get('/few/{id_few}/edit', [FewController::class, 'edit']);
 Route::post('/few/update', [FewController::class, 'update']);
-//fnap
+//sa
 Route::get('/sa/view', [FnapController::class, 'view']);
 Route::post('/sa/store', [FnapController::class, 'store']);
 Route::get('/sa/{id_sa}/hapus', [FnapController::class, 'hapus']);
 Route::get('/sa/{id_sa}/edit', [FnapController::class, 'edit']);
 Route::post('/sa/update', [FnapController::class, 'update']);
-
+//la
+Route::get('/la/view', [LaController::class, 'view']);
+Route::post('/la/store', [LaController::class, 'store']);
+Route::get('/la/{id_la}/hapus', [LaController::class, 'hapus']);
+Route::get('/la/{id_la}/edit', [LaController::class, 'edit']);
+Route::post('/la/update', [LaController::class, 'update']);
+//lp
+Route::get('/lp/view', [LpController::class, 'view']);
+Route::post('/lp/store', [LpController::class, 'store']);
+Route::get('/lp/{id_lp}/hapus', [LpController::class, 'hapus']);
+Route::get('/lp/{id_lp}/edit', [LpController::class, 'edit']);
+Route::post('/lp/update', [LpController::class, 'update']);
+//va
+Route::get('/va/view', [VaController::class, 'view']);
+Route::post('/va/store', [VaController::class, 'store']);
+Route::get('/va/{id_va}/hapus', [VaController::class, 'hapus']);
+Route::get('/va/{id_va}/edit', [VaController::class, 'edit']);
+Route::post('/va/update', [VaController::class, 'update']);
 
 });
 
