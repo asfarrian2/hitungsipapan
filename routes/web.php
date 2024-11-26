@@ -7,6 +7,9 @@ use App\Http\Controllers\WpController;
 use App\Http\Controllers\WpapController;
 use App\Http\Controllers\UppdController;
 use App\Http\Controllers\ObjekController;
+use App\Http\Controllers\HdapController;
+use App\Http\Controllers\FewController;
+use App\Http\Controllers\FnapController;
 use App\Models\Uppd;
 use App\Models\User;
 use App\Models\wp;
@@ -56,6 +59,25 @@ Route::get('/uppd/{id_unit}/hapus', [UppdController::class, 'hapus']);
 Route::get('/uppd/{id_unit}/edit', [UppdController::class, 'edit']);
 Route::post('/uppd/update', [UppdController::class, 'update']);
 Route::get('/uppd/{id_unit}/reset', [UppdController::class, 'reset']);
+//hdap
+Route::get('/hdap/view', [HdapController::class, 'view']);
+Route::post('/hdap/store', [HdapController::class, 'store']);
+Route::get('/hdap/{id_hdap}/hapus', [HdapController::class, 'hapus']);
+Route::get('/hdap/{id_hdap}/edit', [HdapController::class, 'edit']);
+Route::post('/hdap/update', [HdapController::class, 'update']);
+//hdap
+Route::get('/few/view', [FewController::class, 'view']);
+Route::post('/few/store', [FewController::class, 'store']);
+Route::get('/few/{id_few}/hapus', [FewController::class, 'hapus']);
+Route::get('/few/{id_few}/edit', [FewController::class, 'edit']);
+Route::post('/few/update', [FewController::class, 'update']);
+//fnap
+Route::get('/sa/view', [FnapController::class, 'view']);
+Route::post('/sa/store', [FnapController::class, 'store']);
+Route::get('/sa/{id_sa}/hapus', [FnapController::class, 'hapus']);
+Route::get('/sa/{id_sa}/edit', [FnapController::class, 'edit']);
+Route::post('/sa/update', [FnapController::class, 'update']);
+
 
 });
 
