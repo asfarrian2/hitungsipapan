@@ -133,11 +133,34 @@ class ObjekController extends Controller
         ->leftJoin('kds', 'objek_pajak.id_kds', '=', 'kds.id_kds')
         ->leftJoin('kp', 'objek_pajak.id_kp', '=', 'kp.id_kp')
         ->leftJoin('fkpap', 'objek_pajak.id_fkpap', '=', 'fkpap.id_fkpap')
-        ->select('objek_pajak.*', 'tb_wp.nama')
-        ->join('tb_wp', 'objek_pajak.id_wajibpajak', '=', 'tb_wp.id_wajibpajak')
+        ->leftjoin('tb_wp', 'objek_pajak.id_wajibpajak', '=', 'tb_wp.id_wajibpajak')
         ->where('id_objek', $id_objek)
         ->first();
-        return view('operator.objek.edit', compact('objek_pajak'));
+
+        $hdap = DB::table('hdap')
+        ->get();
+        $few = DB::table('few')
+        ->get();
+        $sa = DB::table('sa')
+        ->get();
+        $la = DB::table('la')
+        ->get();
+        $lp = DB::table('lp')
+        ->get();
+        $va = DB::table('va')
+        ->get();
+        $ka = DB::table('ka')
+        ->get();
+        $kds = DB::table('kds')
+        ->get();
+        $kp = DB::table('kp')
+        ->get();
+        $fkpap = DB::table('fkpap')
+        ->get();
+
+
+        return view('operator.objek.edit', compact('objek_pajak', 'hdap',
+        'few', 'sa', 'la', 'lp', 'va', 'ka', 'kds', 'kp', 'fkpap'));
 
     }
 
@@ -146,15 +169,35 @@ class ObjekController extends Controller
         $id_wajibpajak = $request->id_wajibpajak;
         $id_objek = $request->id_objek;
         $nama_objek = $request->nama_objek;
+        $id_hdap        = $request->id_hdap;
+        $id_few         = $request->id_few;
+        $id_sa          = $request->id_sa;
+        $id_la          = $request->id_la;
+        $id_lp          = $request->id_lp;
+        $id_va          = $request->id_va;
+        $id_ka          = $request->id_ka;
+        $id_kds         = $request->id_kds;
+        $id_kp          = $request->id_kp;
+        $id_fkpap       = $request->id_fkpap;
         $data =  [
-            'nama_objek' => $nama_objek
+            'nama_objek' => $nama_objek,
+            'id_hdap'       => $id_hdap,
+            'id_few'        => $id_few,
+            'id_sa'         => $id_sa,
+            'id_la'         => $id_la,
+            'id_lp'         => $id_lp,
+            'id_va'         => $id_va,
+            'id_ka'         => $id_ka,
+            'id_kds'        => $id_kds,
+            'id_kp'         => $id_kp,
+            'id_fkpap'      => $id_fkpap
             ];
 
             $update = DB::table('objek_pajak')->where('id_objek', $id_objek)->update($data);
             if ($update){
-                return Redirect('/operator/objek/'.$id_wajibpajak.'/detail')->with(['success' => 'Data Berhasil Dihapus']);
+                return Redirect('/operator/objek/'.$id_wajibpajak.'/detail')->with(['success' => 'Data Berhasil Disimpan']);
             }else{
-                return Redirect::back()->with(['warning' => 'Data Gagal Dihapus']);
+                return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
             }
      }
 
