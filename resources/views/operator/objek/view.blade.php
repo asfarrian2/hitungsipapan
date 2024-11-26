@@ -50,18 +50,36 @@
                     <table id="datatable" class="table table-striped table-bordered" width="100%">
                       <thead>
                         <tr>
-                          <th width="10px" class="text-center">No.</th>
-                          <th width="10px" class="text-center">ID</th>
-                          <th class="text-center">Nama Objek</th>
+                          <th width="10px" class="text-center"><b>No.</b></th>
+                          <th class="text-center"><b>Nama Objek</b></th>
+                          <th class="text-center">HDAP</th>
+                          <th class="text-center">FEW</th>
+                          <th class="text-center">SA</th>
+                          <th class="text-center">LA</th>
+                          <th class="text-center">LP</th>
+                          <th class="text-center">VA</th>
+                          <th class="text-center">KA</th>
+                          <th class="text-center">KDS</th>
+                          <th class="text-center">KP</th>
+                          <th class="text-center">FKPAP</th>
                           <th class="text-center">Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
                       @foreach ($objek as $d)
                         <tr>
-                          <td class="text-center">{{ $loop->iteration }}</td>
-                          <td>{{ $d->id_objek }}</td>
-                          <td>{{ $d->nama_objek }}</td>
+                          <td class="text-center"><b>{{ $loop->iteration }}</b></td>
+                          <td><b>{{ $d->nama_objek }}</b></td>
+                          <td>{{ $d->kelompok_hdap }} - Harga Dasar: Rp <?php echo number_format($d->nilai_hdap,0,',','.')?> </td>
+                          <td>{{ $d->nilai_pdrb }} - Faktor: {{$d->faktor_few}}% </td>
+                          <td>{{ $d->sumber_air }} - Bobot: {{$d->bobot_sa}}% </td>
+                          <td>{{ $d->lokasi_la }} - Bobot: {{$d->bobot_la}}% </td>
+                          <td>{{ $d->lokasi_lp }} - Bobot: {{$d->bobot_lp}}% </td>
+                          <td>{{ $d->volume }} - Bobot: {{$d->bobot_va}}% </td>
+                          <td>{{ $d->kualitas_air }} - Bobot: {{$d->bobot_ka}}% </td>
+                          <td>{{ $d->klasifikasi }} - Bobot: {{$d->bobot_kds}}% </td>
+                          <td>{{ $d->klasifikasi_kp }} - Bobot: {{$d->bobot_kp}}% </td>
+                          <td>{{$d->pengguna_fkpap}} = {{$d->fkpa}}</td>
                           @csrf
                           <td>
                             <a href="/operator/objek/{{ $d->id_objek }}/edit" title="Edit Data"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>
@@ -101,12 +119,141 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="input-icon mb-3">
-                                <span>Nama</span>
-                                <input type="text" value="" id="nama" class="form-control" placeholder="Nama Objek" name="nama">
+                                <span>Nama Objek</span>
+                                <input type="text" value="" id="nama" class="form-control" placeholder="" name="nama" required>
                             </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            <span>HDAP</span>
+                            <select name="id_hdap" id="unit" class="form-control" required="required">
+                            <option value="">Pilih HDAP</option>
+                            @foreach ($hdap as $d)
+                            <option value="{{ $d->id_hdap }}">{{ $d->kelompok_hdap }} - Harga Dasar: Rp <?php echo number_format($d->nilai_hdap,0,',','.')?> </option>
+                             @endforeach
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            <span>FEW</span>
+                            <select name="id_few" id="unit" class="form-control" required="required">
+                            <option value="">Pilih FEW</option>
+                            @foreach ($few as $d)
+                            <option value="{{ $d->id_few }}">{{ $d->nilai_pdrb }} - Faktor: {{$d->faktor_few}}% </option>
+                             @endforeach
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            <span>FNAP SA</span>
+                            <select name="id_sa" id="unit" class="form-control" required="required">
+                            <option value="">Pilih SA</option>
+                            @foreach ($sa as $d)
+                            <option value="{{ $d->id_sa }}">{{ $d->sumber_air }} - Bobot: {{$d->bobot_sa}}% </option>
+                             @endforeach
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            <span>FNAP LA</span>
+                            <select name="id_la" id="unit" class="form-control" required="required">
+                            <option value="">Pilih LA</option>
+                            @foreach ($la as $d)
+                            <option value="{{ $d->id_la }}">{{ $d->lokasi_la }} - Bobot: {{$d->bobot_la}}% </option>
+                             @endforeach
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            <span>FNAP LP</span>
+                            <select name="id_lp" id="unit" class="form-control" required="required">
+                            <option value="">Pilih LP</option>
+                            @foreach ($lp as $d)
+                            <option value="{{ $d->id_lp }}">{{ $d->lokasi_lp }} - Bobot: {{$d->bobot_lp}}% </option>
+                             @endforeach
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            <span>FNAP VA</span>
+                            <select name="id_va" id="unit" class="form-control" required="required">
+                            <option value="">Pilih VA</option>
+                            @foreach ($va as $d)
+                            <option value="{{ $d->id_va }}">{{ $d->volume }} - Bobot: {{$d->bobot_va}}% </option>
+                             @endforeach
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            <span>FNAP KA</span>
+                            <select name="id_ka" id="unit" class="form-control" required="required">
+                            <option value="">Pilih KA</option>
+                            @foreach ($ka as $d)
+                            <option value="{{ $d->id_ka }}">{{ $d->kualitas_air }} - Bobot: {{$d->bobot_ka}}% </option>
+                             @endforeach
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            <span>FNAP KDS</span>
+                            <select name="id_kds" id="unit" class="form-control" required="required">
+                            <option value="">Pilih KDS</option>
+                            @foreach ($kds as $d)
+                            <option value="{{ $d->id_kds }}">{{ $d->klasifikasi }} - Bobot: {{$d->bobot_kds}}% </option>
+                             @endforeach
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            <span>FNAP KP</span>
+                            <select name="id_kp" id="unit" class="form-control" required="required">
+                            <option value="">Pilih KP</option>
+                            @foreach ($kp as $d)
+                            <option value="{{ $d->id_kp }}">{{ $d->klasifikasi_kp }} - Bobot: {{$d->bobot_kp}}% </option>
+                             @endforeach
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            <span>FKPAP</span>
+                            <select name="id_fkpap" id="unit" class="form-control" required="required">
+                            <option value="">Pilih FKPAP</option>
+                            @foreach ($fkpap as $d)
+                            <option value="{{ $d->id_fkpap }}">{{$d->pengguna_fkpap}} = {{$d->fkpa}} </option>
+                             @endforeach
+                            </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mt-2">
                         <div class="col-12">
                             <div class="form-group">
