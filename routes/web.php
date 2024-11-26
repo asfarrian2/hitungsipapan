@@ -13,6 +13,10 @@ use App\Http\Controllers\FnapController;
 use App\Http\Controllers\LaController;
 use App\Http\Controllers\LpController;
 use App\Http\Controllers\VaController;
+use App\Http\Controllers\KaController;
+use App\Http\Controllers\KdsController;
+use App\Http\Controllers\KpController;
+use App\Http\Controllers\FkpapController;
 use App\Models\Uppd;
 use App\Models\User;
 use App\Models\wp;
@@ -98,6 +102,30 @@ Route::post('/va/store', [VaController::class, 'store']);
 Route::get('/va/{id_va}/hapus', [VaController::class, 'hapus']);
 Route::get('/va/{id_va}/edit', [VaController::class, 'edit']);
 Route::post('/va/update', [VaController::class, 'update']);
+//ka
+Route::get('/ka/view', [KaController::class, 'view']);
+Route::post('/ka/store', [KaController::class, 'store']);
+Route::get('/ka/{id_ka}/hapus', [KaController::class, 'hapus']);
+Route::get('/ka/{id_ka}/edit', [KaController::class, 'edit']);
+Route::post('/ka/update', [KaController::class, 'update']);
+//kds
+Route::get('/kds/view', [KdsController::class, 'view']);
+Route::post('/kds/store', [KdsController::class, 'store']);
+Route::get('/kds/{id_kds}/hapus', [KdsController::class, 'hapus']);
+Route::get('/kds/{id_kds}/edit', [KdsController::class, 'edit']);
+Route::post('/kds/update', [KdsController::class, 'update']);
+//kp
+Route::get('/kp/view', [KpController::class, 'view']);
+Route::post('/kp/store', [KpController::class, 'store']);
+Route::get('/kp/{id_kp}/hapus', [KpController::class, 'hapus']);
+Route::get('/kp/{id_kp}/edit', [KpController::class, 'edit']);
+Route::post('/kp/update', [KpController::class, 'update']);
+//fkpap
+Route::get('/fkpap/view', [FkpapController::class, 'view']);
+Route::post('/fkpap/store', [FkpapController::class, 'store']);
+Route::get('/fkpap/{id_fkpap}/hapus', [FkpapController::class, 'hapus']);
+Route::get('/fkpap/{id_fkpap}/edit', [FkpapController::class, 'edit']);
+Route::post('/fkpap/update', [FkpapController::class, 'update']);
 
 });
 
