@@ -61,7 +61,9 @@
                           <th class="text-center">KA</th>
                           <th class="text-center">KDS</th>
                           <th class="text-center">KP</th>
+                          <th class="text-center">FNAP</th>
                           <th class="text-center">FKPAP</th>
+                          <th class="text-center">NPAP</th>
                           <th class="text-center">Aksi</th>
                         </tr>
                       </thead>
@@ -79,7 +81,9 @@
                           <td>{{ $d->kualitas_air }} - Bobot: {{$d->bobot_ka}}% </td>
                           <td>{{ $d->klasifikasi }} - Bobot: {{$d->bobot_kds}}% </td>
                           <td>{{ $d->klasifikasi_kp }} - Bobot: {{$d->bobot_kp}}% </td>
+                          <td><b>{{$d->fnap}}</b></td>
                           <td>{{$d->pengguna_fkpap}} = {{$d->fkpa}}</td>
+                          <td><b>{{$d->npap}}</b></td>
                           @csrf
                           <td>
                             <a href="/operator/objek/{{ $d->id_objek }}/edit" title="Edit Data"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>

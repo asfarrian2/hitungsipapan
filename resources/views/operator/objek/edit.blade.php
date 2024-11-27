@@ -187,7 +187,7 @@
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<button type="submit" class="btn btn-success">Simpan</button>
-                                                <a href="/operator/wp/view" class="btn btn-dark">Batal</a>
+                                                <a href="javascript:history.back()" class="btn btn-dark">Batal</a>
 											</div>
 										</div>
 									</form>

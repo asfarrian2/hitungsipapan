@@ -85,6 +85,58 @@ class ObjekController extends Controller
         $id_fkpap       = $request->id_fkpap;
 
 
+        //mencari nilai/bobot
+        $nilai_hdap = DB::table('hdap')
+        ->where('id_hdap',$id_hdap)
+        ->first()->nilai_hdap;
+        // $angka_hdap=$nilai_hdap->nilai_hdap;
+
+        $nilai_few = DB::table('few')
+        ->where('id_few',$id_few)
+        ->first()->faktor_few;
+        // $angka_few=$nilai_few->faktor_few;
+
+        $nilai_sa = DB::table('sa')
+        ->where('id_sa',$id_sa)
+        ->first()->bobot_sa;
+        // $angka_sa=$nilai_sa->bobot_sa;
+
+        $nilai_la = DB::table('la')
+        ->where('id_la',$id_la)
+        ->first()->bobot_la;
+        // $angka_la=$nilai_la->bobot_la;
+
+        $nilai_lp = DB::table('lp')
+        ->where('id_lp',$id_lp)
+        ->first()->bobot_lp;
+        // $angka_lp=$nilai_lp->bobot_lp;
+
+        $nilai_va = DB::table('va')
+        ->where('id_va',$id_va)
+        ->first()->bobot_va;
+
+        $nilai_ka = DB::table('ka')
+        ->where('id_ka',$id_ka)
+        ->first()->bobot_ka;
+
+        $nilai_kds = DB::table('kds')
+        ->where('id_kds',$id_kds)
+        ->first()->bobot_kds;
+
+        $nilai_kp = DB::table('kp')
+        ->where('id_kp',$id_kp)
+        ->first()->bobot_kp;
+
+        $nilai_fkpap = DB::table('fkpap')
+        ->where('id_fkpap',$id_fkpap)
+        ->first()->fkpa;
+
+
+
+        $fnap=($nilai_sa/100)*($nilai_la/100)*($nilai_lp/100)*($nilai_va/100)*($nilai_ka/100)*($nilai_kds/100)*($nilai_kp/100);
+        $npap=$nilai_hdap*($nilai_few/100)*$fnap*$nilai_fkpap;
+
+        //proses simpan
         $data=[
             'id_objek'      => $id,
             'id_wajibpajak' => $id_wajibpajak,
@@ -98,7 +150,9 @@ class ObjekController extends Controller
             'id_ka'         => $id_ka,
             'id_kds'        => $id_kds,
             'id_kp'         => $id_kp,
-            'id_fkpap'      => $id_fkpap
+            'id_fkpap'      => $id_fkpap,
+            'fnap'          => $fnap,
+            'npap'          => $npap
         ];
 
         $insert=DB::table('objek_pajak')->insert($data);
@@ -179,6 +233,58 @@ class ObjekController extends Controller
         $id_kds         = $request->id_kds;
         $id_kp          = $request->id_kp;
         $id_fkpap       = $request->id_fkpap;
+
+        //mencari nilai
+        $nilai_hdap = DB::table('hdap')
+        ->where('id_hdap',$id_hdap)
+        ->first()->nilai_hdap;
+        // $angka_hdap=$nilai_hdap->nilai_hdap;
+
+        $nilai_few = DB::table('few')
+        ->where('id_few',$id_few)
+        ->first()->faktor_few;
+        // $angka_few=$nilai_few->faktor_few;
+
+        $nilai_sa = DB::table('sa')
+        ->where('id_sa',$id_sa)
+        ->first()->bobot_sa;
+        // $angka_sa=$nilai_sa->bobot_sa;
+
+        $nilai_la = DB::table('la')
+        ->where('id_la',$id_la)
+        ->first()->bobot_la;
+        // $angka_la=$nilai_la->bobot_la;
+
+        $nilai_lp = DB::table('lp')
+        ->where('id_lp',$id_lp)
+        ->first()->bobot_lp;
+        // $angka_lp=$nilai_lp->bobot_lp;
+
+        $nilai_va = DB::table('va')
+        ->where('id_va',$id_va)
+        ->first()->bobot_va;
+
+        $nilai_ka = DB::table('ka')
+        ->where('id_ka',$id_ka)
+        ->first()->bobot_ka;
+
+        $nilai_kds = DB::table('kds')
+        ->where('id_kds',$id_kds)
+        ->first()->bobot_kds;
+
+        $nilai_kp = DB::table('kp')
+        ->where('id_kp',$id_kp)
+        ->first()->bobot_kp;
+
+        $nilai_fkpap = DB::table('fkpap')
+        ->where('id_fkpap',$id_fkpap)
+        ->first()->fkpa;
+
+
+
+        $fnap=($nilai_sa/100)*($nilai_la/100)*($nilai_lp/100)*($nilai_va/100)*($nilai_ka/100)*($nilai_kds/100)*($nilai_kp/100);
+        $npap=$nilai_hdap*($nilai_few/100)*$fnap*$nilai_fkpap;
+
         $data =  [
             'nama_objek' => $nama_objek,
             'id_hdap'       => $id_hdap,
@@ -190,7 +296,10 @@ class ObjekController extends Controller
             'id_ka'         => $id_ka,
             'id_kds'        => $id_kds,
             'id_kp'         => $id_kp,
-            'id_fkpap'      => $id_fkpap
+            'id_fkpap'      => $id_fkpap,
+            'fnap'          => $fnap,
+            'npap'          => $npap
+
             ];
 
             $update = DB::table('objek_pajak')->where('id_objek', $id_objek)->update($data);

@@ -137,6 +137,17 @@ Route::middleware(['guest:uppd'])->group(function () {
     Route::post('/login_operator', [AuthController::class, 'login_operator']);
     });
 
+    Route::get('/test', function () {
+        $id_sa          = 100;
+        $id_la          = 100;
+        $id_lp          = 100;
+        $id_va          = 30;
+        $id_ka          = 90;
+        $id_kds         = 120;
+        $id_kp          = 100;
+        echo ($id_sa/100)*($id_la/100)*($id_lp/100)*($id_va/100)*($id_ka/100)*($id_kds/100)*($id_kp/100)*100*300*(85/100);
+    });
+
 
 Route::middleware(['auth:uppd'])->group(function () {
 
