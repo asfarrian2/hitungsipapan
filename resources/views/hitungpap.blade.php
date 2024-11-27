@@ -26,18 +26,22 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form action="/wp/store" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+									<form action="/wp/hitung/{{ $objek_pajak->id_objek }}" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                                         @csrf
                                         <div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Objek PAP
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-                                                <select name="objek" id="unit" class="form-control" required="required">
-                                                    <option value="">Pilih Objek PAP</option>
-                                                   {{-- @foreach ($uppd as $d) --}}
-                                                   {{-- <option value="{{ $d->id_unit }}">{{ $d->nama_unit }}</option> --}}
-                                                   {{-- @endforeach --}}
-                                                   </select>
+                                                <input readonly type="text" name="id_objek" value="{{$objek_pajak->id_objek}}" id="unit" class="form-control" required="required">
+                                                </input>
+											</div>
+										</div>
+                                        <div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Objek PAP
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+                                                <input readonly type="text" name="nama_objek" value="{{$objek_pajak->nama_objek}}" id="unit" class="form-control" required="required">
+                                                </input>
 											</div>
 										</div>
                                         <div class="item form-group">
@@ -47,10 +51,7 @@
 												<input type="number" name="m3" id="first-name" required="required" class="form-control ">
 											</div>
 										</div>
-                                        <div class="item form-group">
-
                                             <div class="webcem webcam-capture video"></div>
-                                        </div>
                                         <div class="clearfix"></div>
 										<div class="ln_solid"></div>
 										<div class="item form-group">

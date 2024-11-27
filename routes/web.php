@@ -191,7 +191,8 @@ Route::post('/proses_login_wp', [AuthController::class, 'proses_login_wp']);
 
 Route::middleware(['auth:wp'])->group(function () {
 Route::get('/wp/home', [DashboardController::class, 'home']);
-Route::get('/wp/hitungpap', [WpapController::class, 'create']);
+Route::post('/wp/create/{id_objek}', [WpapController::class, 'create']);
+Route::post('/wp/hitung/{id_objek}', [WpapController::class, 'hitung']);
 Route::get('/wp/store', [WpapController::class, 'store']);
 Route::get('/logout_wp', [AuthController::class, 'logout_wp']);
 });

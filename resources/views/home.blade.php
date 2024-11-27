@@ -35,30 +35,75 @@
                 <ul class="bs-glyphicons-list">
 
                   <li>
-                    <a class="text-secondary" href="/wp/hitungpap">
+                    <button id="pilih_objek" class="btn text-secondary objek" href="#">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     <h4 class="glyphicon-class">Hitung Pajak</h4>
-                    </a>
+                    </button>
                   </li>
 
                   <li>
-                    <a class="text-secondary" href="#">
+                    <a class="btn text-secondary" href="#">
                     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                     <h4 class="glyphicon-class">Histori</h4>
                     </a>
                   </li>
                 </ul>
-              </div>
-              </div>
-            </div>
+                </div>
           </div>
         </div>
-      </div>
+     </div>
+   </div>
+</div>
+</div>
+</div>
+<!-- Modal Tambah Objek Pajak -->
+<div class="modal modal-blur fade" id="modal-inputobjek" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pilih Objek PAP</h5>
+                <button type="button" class="fa fa-close close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/wp/hitung/{$objek_pajak->id_objek}" method="POST" id="frmCabang">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            @csrf
+                                <input type="hidden" id="" value="" class="form-control" placeholder="Kode Lokasi" name="id_wajibpajak">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                            <select name="id_objek" id="unit" class="form-control" required="required">
+                            <option value="">Pilih Objek</option>
+                            @foreach ($objek_pajak as $d)
+                            <option value="{{ $d->id_objek }}">{{ $d->nama_objek }}</option>
+                             @endforeach
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <button class="btn btn-success w-100">
+                                    Pilih
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
 @endsection
 
-@push('myscript')
+@push('wpscript')
 <script>
 $('.hapus').click(function(){
     var id_unit = $(this).attr('data-id');
@@ -83,25 +128,12 @@ Swal.fire({
 </script>
 
 <script>
-$('.reset').click(function(){
-    var id_unit = $(this).attr('data-id');
-Swal.fire({
-  title: "Apakah Anda Yakin Ingin Melakukan Reset Password ?",
-  text: "Jika Ya Maka Data Password Akan Direset",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Ya, Reset Saja!"
-}).then((result) => {
-  if (result.isConfirmed) {
-    window.location = "/uppd/"+id_unit+"/reset"
-    Swal.fire({
-      title: "Password Berhasil Direset !",
-      icon: "success"
-    });
-  }
+
+ $(".objek").click(function() {
+    $("#modal-inputobjek").modal("show");
 });
-});
+
+
+var span = document.getElementsByClassName("close")[0];
 </script>
 @endpush
