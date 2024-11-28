@@ -220,10 +220,9 @@ function tgl_indo($tanggal){
 
                       <!-- this row will not appear when printing -->
                       <div class="row no-print">
-                        <div class=" ">
-                          <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
-                          <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
-                          <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
+                        <div class="" style="margin-top:40px">
+                        <a href="/wp/cetak/{{$hitung->id_hitung}}" target="_blank" class="btn btn-success pull-right"><i class="fa fa-print"></i> Print</a>
+                          <a href="/wp/cetak/{{$hitung->id_hitung}}" class="btn btn-success pull-right" download="newfilename"><i class="fa fa-download"></i> Download</a>
                         </div>
                       </div>
                     </section>

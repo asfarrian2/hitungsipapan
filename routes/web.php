@@ -195,6 +195,7 @@ Route::get('/wp/histori', [WpapController::class, 'view']);
 Route::post('/wp/create/{id_objek}', [WpapController::class, 'create']);
 Route::post('/wp/hitung/{id_objek}', [WpapController::class, 'hitung']);
 Route::get('/wp/hasil/{id_objek}', [WpapController::class, 'hasil']);
+Route::get('/wp/cetak/{id_objek}', [WpapController::class, 'cetak']);
 Route::get('/wp/store', [WpapController::class, 'store']);
 Route::get('/logout_wp', [AuthController::class, 'logout_wp']);
 });
