@@ -42,7 +42,7 @@
                   </li>
 
                   <li>
-                    <a class="btn text-secondary" href="#">
+                    <a class="btn text-secondary" href="/wp/histori">
                     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                     <h4 class="glyphicon-class">HASIL PERHITUNGAN</h4>
                     </a>

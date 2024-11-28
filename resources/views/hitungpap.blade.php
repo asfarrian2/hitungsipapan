@@ -26,7 +26,7 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form action="/wp/hitung/{{ $objek_pajak->id_objek }}" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+									<form action="/wp/hitung/{{ $objek_pajak->id_objek }}" method="POST" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left">
                                         @csrf
                                         <div class="item form-group">
 											<div class="col-md-6 col-sm-6 ">
@@ -53,7 +53,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Foto Water Meter
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-                                                <input type="file" accept="image/*" capture="camera" name="foto" id="unit" class="form-control" required="required">
+                                                <input type="file" accept="image/*" id="fileuploadInput" name="foto" class="form-control" required="required">
                                                 </input>
 											</div>
 										</div>

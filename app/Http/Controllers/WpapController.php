@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Hash;
 class WpapController extends Controller
 {
 
+    public function view(){
+        $id_wajibpajak = Auth::guard('wp')->user()->id_wajibpajak;
+        $hitung = DB::table('hitung')
+        ->leftJoin('objek_pajak', 'hitung.id_objek', '=', 'objek_pajak.id_objek')
+        ->leftJoin('tb_wp', 'objek_pajak.id_wajibpajak', '=', 'tb_wp.id_wajibpajak')
+        ->where('hitung.id_wajibpajak',$id_wajibpajak)
+        ->get();
+
+        return view('view_histori', compact('hitung'));
+    }
+
     public function create($id_objek, Request $request){
 
         $id_objek = $request->id_objek;
@@ -34,10 +45,11 @@ class WpapController extends Controller
         return view('hitungpap', compact('objek_pajak'));
     }
 
-    public function hitung($id_objek, Request $request){
+    public function hitung(Request $request){
 
         $id_objek = $request -> id_objek;
         $m3 = $request -> m3;
+        $id_wajibpajak = Auth::guard('wp')->user()->id_wajibpajak;
 
         $objek_pajak = DB::table('objek_pajak')
         ->leftJoin('hdap', 'objek_pajak.id_hdap', '=', 'hdap.id_hdap')
@@ -64,7 +76,7 @@ class WpapController extends Controller
 
         //ID Hitung
         $hitung=DB::table('hitung')
-        ->latest('id_objek', 'DESC')
+        ->latest('id_hitung', 'DESC')
         ->first();
 
         $kodehitung ="HT";
@@ -72,16 +84,25 @@ class WpapController extends Controller
         if($hitung == null){
             $nomorurut = "0000000000001";
         }else{
-            $nomorurut = substr($hitung->id_objek, 2, 13) + 1;
+            $nomorurut = substr($hitung->id_hitung, 2, 13) + 1;
             $nomorurut = str_pad($nomorurut, 13, "0", STR_PAD_LEFT);
         }
-        $id=$kodehitung.$hitung.$nomorurut;
+        $id=$kodehitung.$nomorurut;
+        $request->validate([
+            'foto' => 'image'
+        ]);
+        if ($request->hasFile('foto')) {
+            $foto = $id . "." . $request->file('foto')->getClientOriginalExtension();
+        } else {
+            $foto = $id->foto;
+        }
 
         $data=[
             'id_hitung' => $id,
             'id_objek' => $id_objek,
+            'id_wajibpajak' => $id_wajibpajak,
             'status' => 0,
-            'foto' => 0,
+            'foto' => $foto,
             'tanggal' => date('Y-m-d'),
             'volume_pemakaian' => $m3,
             'jumlah_pap' => $hasil
@@ -89,6 +110,10 @@ class WpapController extends Controller
         ];
         $insert=DB::table('hitung')->insert($data);
         if ($insert){
+            if ($request->hasFile('foto')) {
+                $folderPath = "public/uploads/hitung/";
+                $request->file('foto')->storeAs($folderPath, $foto);
+            }
             return view('hasil', compact ('npap','hasil', 'objek_pajak', 'jumlah_fnap', 'm3'));
             }else{
                 return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
