@@ -80,7 +80,7 @@
           <div class="row">
             <div class="  invoice-header">
               <h3>
-                <img src="/wp/img/logoutama.png" height="150px" alt="Logo">HITUNG PAP
+                <img src="/wp/img/logoutama.png" height="100px" alt="Logo">HITUNG PAP
                           </h3>
             </div>
             <!-- /.col -->
@@ -255,12 +255,11 @@
                 <td style="text-align: center" class="text-dark"><b>PIMPINAN</b></td>
             </tr>
             <tr>
-                <td style="text-align: center" class="text-dark"><b>PT. SLSOSKOSKOSKOKSOKSOKSOKSOKOKO</b></td>
+                <td style="text-align: center" class="text-dark"><b>{{ strtoupper($hitung->nama)}}</b></td>
             </tr>
             <tr>
                 <td style="text-align: center; vertical-align:bottom" height="100px" class="text-dark">
-                    <b><u>FEBRI</b></u><br>
-                    <span>NIP. 19800813 200712 1 001<span>
+                    <b><u>{{$hitung->pimpinan}}</b></u><br>
                 </td>
                 </td>
             </tr>

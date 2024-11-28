@@ -36,6 +36,7 @@ class WpController extends Controller
         $nama     = $request->nama;
         $alamat   = $request->alamat;
         $kegiatan = $request->kegiatan;
+        $pimpinan = $request->pimpinan;
         $no_telp  = $request->no_telp;
         $email    = $request->email;
         $id_unit = Auth::guard('uppd')->user()->id_unit;
@@ -55,6 +56,7 @@ class WpController extends Controller
                 'alamat'    => $alamat,
                 'kegiatan'  => $kegiatan,
                 'no_telp'   => $no_telp,
+                'pimpinan'  => $pimpinan,
                 'email'     => $email,
                 'id_unit'   => $id_unit,
                 'password'  => $password
@@ -86,6 +88,7 @@ class WpController extends Controller
         $id_wajibpajak = $request->id_wajibpajak;
         $nama     = $request->nama;
         $alamat   = $request->alamat;
+        $pimpinan = $request->pimpinan;
         $kegiatan = $request->kegiatan;
         $no_telp  = $request->no_telp;
         $email    = $request->email;
@@ -104,6 +107,7 @@ class WpController extends Controller
             'nama'      => $nama,
             'alamat'    => $alamat,
             'kegiatan'  => $kegiatan,
+            'pimpinan'  => $pimpinan,
             'no_telp'   => $no_telp,
             'email'     => $email,
             'id_unit'   => $unit

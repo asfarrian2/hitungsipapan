@@ -20,7 +20,17 @@ class DashboardController extends Controller
 
     public function dashboard_operator()
     {
-        return view('operator.dashboard');
+        $id_unit= Auth::guard('uppd')->user()->id_unit;
+        $jumlah_wp=DB::table('tb_wp')
+        ->where('id_unit', $id_unit)
+        ->count();
+
+
+
+
+
+
+        return view('operator.dashboard', compact('jumlah_wp'));
     }
 
     public function home()

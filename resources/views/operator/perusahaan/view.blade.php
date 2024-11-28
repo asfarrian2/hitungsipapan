@@ -43,7 +43,8 @@
                           <th class="text-center">Nama</th>
                           <th class="text-center">Alamat</th>
                           <th class="text-center">Kegiatan</th>
-                          <th class="text-center">No. Telp</th>
+                          <th class="text-center">Pimpinan</th>
+                          <!-- <th class="text-center">No. Telp</th> -->
                           <th class="text-center">Email</th>
                           <th class="text-center">Aksi</th>
                         </tr>
@@ -56,7 +57,8 @@
                           <td>{{ $d->nama }}</td>
                           <td>{{ $d->alamat }}</td>
                           <td>{{ $d->kegiatan }}</td>
-                          <td>{{ $d->no_telp }}</td>
+                          <td>{{ $d->pimpinan }}</td>
+                          <!-- <td>{{ $d->no_telp }}</td> -->
                           <td>{{ $d->email }}</td>
                           @csrf
                           <td>

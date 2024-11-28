@@ -222,7 +222,7 @@ function tgl_indo($tanggal){
                       <div class="row no-print">
                         <div class="" style="margin-top:40px">
                         <a href="/wp/cetak/{{$hitung->id_hitung}}" target="_blank" class="btn btn-success pull-right"><i class="fa fa-print"></i> Print</a>
-                          <a href="/wp/cetak/{{$hitung->id_hitung}}" class="btn btn-success pull-right" download="newfilename"><i class="fa fa-download"></i> Download</a>
+
                         </div>
                       </div>
                     </section>
