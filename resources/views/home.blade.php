@@ -33,18 +33,16 @@
               <h2 id="glyphicons-glyphs">MENU</h2>
               <div class="bs-glyphicons">
                 <ul class="bs-glyphicons-list">
-
                   <li>
                     <button id="pilih_objek" class="btn text-secondary objek" href="#">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                    <h4 class="glyphicon-class">HITUNG PAJAK AIR PERMUKAAN</h4>
+                    <h4 class="glyphicon-class">HITUNG PAP</h4>
                     </button>
                   </li>
-
                   <li>
                     <a class="btn text-secondary" href="/wp/histori">
                     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-                    <h4 class="glyphicon-class">HASIL PERHITUNGAN</h4>
+                    <h4 class="glyphicon-class">HASIL</h4>
                     </a>
                   </li>
                 </ul>
