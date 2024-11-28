@@ -46,6 +46,9 @@
                       </thead>
                       <tbody>
                       @foreach ($hitung as $d)
+                      @php
+                      $foto_volume = Storage::url('uploads/hitung/' . $d->foto);
+                      @endphp
                         <tr>
                           <td class="text-center">{{ $loop->iteration }}</td>
                           <td>{{ $d->id_hitung }}</td>
@@ -53,7 +56,7 @@
                           <td>{{ $d->nama_objek }}</td>
                           <td>{{ $d->volume_pemakaian }} M3</td>
                           <td>Rp <?php echo number_format($d->jumlah_pap,0,',','.')?></td>
-                          <td>{{ $d->foto }}</td>
+                          <td><img src="{{ url($foto_volume) }}" width="200px" alt=""></td>
                           <td>@if ($d->pengajuan == null)
                             <a class="btn-warning">Tidak Ada</a>
                              @else
