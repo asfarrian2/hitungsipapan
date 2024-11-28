@@ -37,14 +37,14 @@
                   <li>
                     <button id="pilih_objek" class="btn text-secondary objek" href="#">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                    <h4 class="glyphicon-class">Hitung Pajak</h4>
+                    <h4 class="glyphicon-class">HITUNG PAJAK AIR PERMUKAAN</h4>
                     </button>
                   </li>
 
                   <li>
                     <a class="btn text-secondary" href="#">
                     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-                    <h4 class="glyphicon-class">Histori</h4>
+                    <h4 class="glyphicon-class">HASIL PERHITUNGAN</h4>
                     </a>
                   </li>
                 </ul>
@@ -65,7 +65,7 @@
                 <button type="button" class="fa fa-close close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form action="/wp/hitung/{$objek_pajak->id_objek}" method="POST" id="frmCabang">
+                <form action="/wp/create/{$objek_pajak->id_objek}" method="POST" id="frmCabang">
                     <div class="row">
                         <div class="col-12">
                             <div class="input-icon mb-3">

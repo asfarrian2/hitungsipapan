@@ -29,10 +29,8 @@
 									<form action="/wp/hitung/{{ $objek_pajak->id_objek }}" method="POST" data-parsley-validate class="form-horizontal form-label-left">
                                         @csrf
                                         <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Objek PAP
-											</label>
 											<div class="col-md-6 col-sm-6 ">
-                                                <input readonly type="text" name="id_objek" value="{{$objek_pajak->id_objek}}" id="unit" class="form-control" required="required">
+                                                <input readonly type="hidden" name="id_objek" value="{{$objek_pajak->id_objek}}" id="unit" class="form-control" required="required">
                                                 </input>
 											</div>
 										</div>
@@ -45,13 +43,20 @@
 											</div>
 										</div>
                                         <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Penggunaan Air (M3)
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Volume Penggunaan Air (M3)
 											</label>
 											<div class="col-md-6 col-sm-6 ">
 												<input type="number" name="m3" id="first-name" required="required" class="form-control ">
 											</div>
 										</div>
-                                            <div class="webcem webcam-capture video"></div>
+                                        <div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Foto Water Meter
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+                                                <input type="file" accept="image/*" capture="camera" name="foto" id="unit" class="form-control" required="required">
+                                                </input>
+											</div>
+										</div>
                                         <div class="clearfix"></div>
 										<div class="ln_solid"></div>
 										<div class="item form-group">

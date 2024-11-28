@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Hash;
 class WpapController extends Controller
 {
 
-    public function create($id_objek){
+    public function create($id_objek, Request $request){
 
+        $id_objek = $request->id_objek;
         $objek_pajak = DB::table('objek_pajak')
         ->leftJoin('hdap', 'objek_pajak.id_hdap', '=', 'hdap.id_hdap')
         ->leftJoin('few', 'objek_pajak.id_few', '=', 'few.id_few')
@@ -35,6 +36,7 @@ class WpapController extends Controller
 
     public function hitung($id_objek, Request $request){
 
+        $id_objek = $request -> id_objek;
         $m3 = $request -> m3;
 
         $objek_pajak = DB::table('objek_pajak')
@@ -48,15 +50,49 @@ class WpapController extends Controller
         ->leftJoin('kds', 'objek_pajak.id_kds', '=', 'kds.id_kds')
         ->leftJoin('kp', 'objek_pajak.id_kp', '=', 'kp.id_kp')
         ->leftJoin('fkpap', 'objek_pajak.id_fkpap', '=', 'fkpap.id_fkpap')
+        ->leftJoin('tb_wp', 'objek_pajak.id_wajibpajak', '=', 'tb_wp.id_wajibpajak')
+        ->leftJoin('tb_uppd', 'tb_wp.id_unit', '=', 'tb_uppd.id_unit')
         ->where('id_objek',$id_objek)
         ->first();
 
         // RUMUS
+        $fnap  = $objek_pajak->fnap;
+        $jumlah_fnap = $fnap*100;
         $tarif = '0.1'; //100%
         $npap  = $objek_pajak->npap;
         $hasil = $tarif*$npap*$m3;
 
-        return view('hasil', compact ('npap','hasil'));
+        //ID Hitung
+        $hitung=DB::table('hitung')
+        ->latest('id_objek', 'DESC')
+        ->first();
+
+        $kodehitung ="HT";
+
+        if($hitung == null){
+            $nomorurut = "0000000000001";
+        }else{
+            $nomorurut = substr($hitung->id_objek, 2, 13) + 1;
+            $nomorurut = str_pad($nomorurut, 13, "0", STR_PAD_LEFT);
+        }
+        $id=$kodehitung.$hitung.$nomorurut;
+
+        $data=[
+            'id_hitung' => $id,
+            'id_objek' => $id_objek,
+            'status' => 0,
+            'foto' => 0,
+            'tanggal' => date('Y-m-d'),
+            'volume_pemakaian' => $m3,
+            'jumlah_pap' => $hasil
+
+        ];
+        $insert=DB::table('hitung')->insert($data);
+        if ($insert){
+            return view('hasil', compact ('npap','hasil', 'objek_pajak', 'jumlah_fnap', 'm3'));
+            }else{
+                return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
+            }
 
     }
 
