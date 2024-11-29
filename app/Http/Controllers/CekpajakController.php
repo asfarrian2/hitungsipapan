@@ -42,8 +42,42 @@ class CekpajakController extends Controller
         ->leftJoin('fkpap', 'objek_pajak.id_fkpap', '=', 'fkpap.id_fkpap')
         ->where('hitung.id_hitung',$id_hitung)
         ->first();
+        $fnap=$hitung->fnap;
+        $cfnap= $fnap*100;
 
-        return view('cetakpap', compact('hitung'));
+        return view('cetakpap', compact('hitung', 'cfnap'));
+    }
+
+    public function verifikasi(Request $request){
+       $id_hitung = $request->id_hitung;
+       $verifikasi    = $request->verifikasi;
+        $data=[
+            'status' => $verifikasi
+        ];
+
+        $update= DB::table('hitung')
+        ->where('id_hitung', $id_hitung)
+        ->update($data);
+        if ($update){
+            return redirect('/operator/cek/view')->with(['success' => 'Verifikasi Berhasil']);
+        }else{
+            return Redirect::back()->with(['warning' => 'Verifikasi Gagal']);
+        }
+
+    }
+
+    public function cancel($id_hitung){
+        $data=[
+            'status'    => 1
+        ];
+        $update=DB::table('hitung')
+        ->where('id_hitung',$id_hitung)
+        ->update($data);
+        if ($update){
+            return redirect('/operator/cek/view')->with(['success' => 'Verifikasi Berhasil Dibatalkan']);
+            }else{
+                return Redirect::back()->with(['warning' => 'Verifikasi Gagal Dibatalkan']);
+            }
     }
 
 

@@ -173,6 +173,9 @@ Route::middleware(['auth:uppd'])->group(function () {
     //Data Perhitungan
     Route::get('/operator/cek/view', [CekpajakController::class, 'view']);
     Route::get('/operator/cetak/{id_objek}', [CekpajakController::class, 'cetak']);
+    Route::get('/operator/download/{id_hitung}', [WpapController::class, 'download']);
+    Route::post('/operator/verifikasi', [CekpajakController::class, 'verifikasi']);
+    Route::get('/operator/cancel/{id_hitung}', [CekpajakController::class, 'cancel']);
 
 });
 
@@ -206,6 +209,7 @@ Route::get('/wp/store', [WpapController::class, 'store']);
 Route::get('/wp/ajukan/{id_hitung}', [WpapController::class, 'ajukan']);
 Route::post('/wp/upload', [WpapController::class, 'upload']);
 Route::get('/wp/download/{id_hitung}', [WpapController::class, 'download']);
+Route::get('/wp/batal/{id_hitung}', [WpapController::class, 'batal']);
 Route::get('/logout_wp', [AuthController::class, 'logout_wp']);
 });
 

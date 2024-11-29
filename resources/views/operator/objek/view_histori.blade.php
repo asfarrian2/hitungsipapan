@@ -40,7 +40,7 @@
                           <th class="text-center">Volume Pemakaian</th>
                           <th class="text-center">Jumlah Pajak Air Permukaan</th>
                           <th class="text-center">Foto Water Meter</th>
-                          <th class="text-center">Pengajuan</th>
+                          <th class="text-center">Laporan</th>
                           <th class="text-center">Status</th>
                           <th class="text-center">Aksi</th>
                         </tr>
@@ -62,25 +62,25 @@
                           <td>@if ($d->pengajuan == null)
                             <a class="btn-warning">Tidak Ada</a>
                              @else
-                            <a class="btn-primary">Diajukan</a>
-                            @endif
+                             <a href="/operator/download/{{$d->id_hitung}}" class="btn btn-success btn-sm" target="_blank"><i class="fa fa-download"></i>Download</a>
+                             @endif
                           <td>@if ($d->status == 2)
-                            <a class="btn-success">Disetujui</a>
+                            <a class="btn-success text-white">Disetujui</a>
                              @elseif($d->status == 1)
-                            <a class="btn-primary">Diajukan</a>
+                            <a class="btn-primary text-white">Diajukan</a>
                             @elseif($d->status == 3)
-                            <a class="btn-danger">Ditolak</a>
+                            <a class="btn-danger text-white">Tidak Disetujui</a>
                             @else
                             <p><a class="btn-warning">Tidak Ada</a><p>
                             @endif</td>
                           @csrf
                           <td>
-                            <a href="/operator/cetak/{{$d->id_hitung}}" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-eye"></i> Lihat</a>
-                            @if ($d->pengajuan == NULL)
-                            <button href="#" class="btn btn-primary btn-sm">Verifikasi</button>
+                            <a href="/operator/cetak/{{$d->id_hitung}}" target="_blank" title="Lihat Hasil Perhitungan"><i class="fa fa-info-circle tn btn-success btn btn-sm"></i></a>
+                            @if ($d->status == '1')
+                            <a class="verifikasi" href="#" data-id="{{ $d->id_hitung }}" title="Verifikasi Data"><i class="verifikasi fa fa-edit text-succsess btn btn-primary btn btn-sm" ></i></a>
                              @else
-                            <a class="btn btn-primary" href="#">Verifikasi</a>
-                            @endif
+                             <a class="cancel" href="#" data-id="{{ $d->id_hitung }}" title="Batalkan Verifikasi"><i class="cancel fa fa-times text-succsess btn btn-danger btn btn-sm" ></i></a>
+                             @endif
                           </td>
                         </tr>
                         @endforeach
@@ -96,8 +96,90 @@
    </div>
 </div>
 
+<!-- Modal Tambah Objek Pajak -->
+<div class="modal modal-blur fade" id="modal-inputobjek" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">Verifikasi Pajak Air Permukaan</h5>
+                <button type="button" class="fa fa-close close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/operator/verifikasi" method="POST" enctype="multipart/form-data" data-parsley-validate id="frmCabang">
+                    @csrf
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                                <span><b>{{$d->id_hitung}}</b></span><br>
+                                <span><b>{{$d->nama}}</b> | Objek PAP <b>{{$d->nama_objek}}</b>: <b>{{$d->volume_pemakaian}}</b> M3 <b>Rp <?php echo number_format($d->jumlah_pap,0,',','.')?></span>
+                                <input type="hidden" name="id_hitung" value="" id="id_hitung_ambil" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                                <span>Verifikasi</span>
+                                <select name="verifikasi" class="form-control" required>
+                                    <option value="">Pilih Status</option>
+                                    <option value="2">Terima</option>
+                                    <option value="3">Tidak Diterima</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <button class="btn btn-success w-100" type="submit">
+                                    Kirim
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-
-
+        </div>
+    </div>
+</div>
 
 @endsection
+
+@push('myscript')
+<script>
+$('.cancel').click(function(){
+    var id_hitung = $(this).attr('data-id');
+Swal.fire({
+  title: "Apakah Anda Yakin Ingin Membatalkan Verifikasi Ini ?",
+  text: "Jika Dibatalkan Pengguna Dapat Mengelola Data Kembali",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Ya, Batalkan Verifikasi"
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location = "/operator/cancel/"+id_hitung
+    Swal.fire({
+      title: "Data Verifikasi Berhasil Dibatalkan !",
+      icon: "success"
+    });
+  }
+});
+});
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+ $(".verifikasi").click(function() {
+    var ambil_id = $(this).attr("data-id");
+    $("#id_hitung_ambil").val(ambil_id);
+    $("#modal-inputobjek").modal("show");
+});
+
+
+var span = document.getElementsByClassName("close")[0];
+</script>
+@endpush

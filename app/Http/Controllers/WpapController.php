@@ -19,7 +19,6 @@ class WpapController extends Controller
         ->leftJoin('objek_pajak', 'hitung.id_objek', '=', 'objek_pajak.id_objek')
         ->leftJoin('tb_wp', 'objek_pajak.id_wajibpajak', '=', 'tb_wp.id_wajibpajak')
         ->where('hitung.id_wajibpajak',$id_wajibpajak)
-        ->where('status', 1 AND 2 AND 3)
         ->orderBy('id_hitung', 'DESC')
         ->get();
 
@@ -214,7 +213,8 @@ class WpapController extends Controller
             }
 
             $data=[
-                'pengajuan' => $dokumen
+                'pengajuan' => $dokumen,
+                'status'    => 1
             ];
             $update=DB::table('hitung')
             ->where('id_hitung',$id_hitung)
@@ -236,6 +236,21 @@ class WpapController extends Controller
             return response()->file($path);
             } else
             abort(404);
+        }
+
+        public function batal($id_hitung){
+            $data=[
+                'pengajuan' => null,
+                'status'    => 0
+            ];
+            $update=DB::table('hitung')
+            ->where('id_hitung',$id_hitung)
+            ->update($data);
+            if ($update){
+                return redirect('/wp/histori')->with(['success' => 'Pengajuan Berhasil Dibatalkan']);
+                }else{
+                    return Redirect::back()->with(['warning' => 'Pengajuan Gagal Dibatalkan']);
+                }
         }
 
 }
