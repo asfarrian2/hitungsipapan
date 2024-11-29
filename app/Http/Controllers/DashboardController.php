@@ -25,11 +25,6 @@ class DashboardController extends Controller
         ->where('id_unit', $id_unit)
         ->count();
 
-
-
-
-
-
         return view('operator.dashboard', compact('jumlah_wp'));
     }
 

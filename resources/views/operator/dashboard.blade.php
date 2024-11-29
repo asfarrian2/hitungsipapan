@@ -8,7 +8,7 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>
+                        <td >
                         <div class="animated flipInY">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-user"></i></div>

@@ -1,4 +1,4 @@
-@extends('layouts.wpmaster')
+@extends('layouts.operatormaster')
 
 @section('content')
 
@@ -20,7 +20,7 @@
 
           <div class="page-title">
             <div class="title_left">
-              <h3>Hasil Perhitungan</h3>
+              <h3>Verifikasi Pajak Air Permukaan</h3>
              </div>
              </div>
              <div class="col-md-12 col-sm-12 ">
@@ -35,6 +35,7 @@
                           <th width="10px" class="text-center">No.</th>
                           <th width="10px" class="text-center">ID</th>
                           <th width="10px" class="text-center">Tanggal</th>
+                          <th width="10px" class="text-center">Wajib Pajak</th>
                           <th class="text-center">Objek Pajak</th>
                           <th class="text-center">Volume Pemakaian</th>
                           <th class="text-center">Jumlah Pajak Air Permukaan</th>
@@ -53,6 +54,7 @@
                           <td class="text-center">{{ $loop->iteration }}</td>
                           <td>{{ $d->id_hitung }}</td>
                           <td>{{ $d->tanggal }}</td>
+                          <td>{{ $d->nama }}</td>
                           <td>{{ $d->nama_objek }}</td>
                           <td>{{ $d->volume_pemakaian }} M3</td>
                           <td>Rp <?php echo number_format($d->jumlah_pap,0,',','.')?></td>
@@ -73,11 +75,11 @@
                             @endif</td>
                           @csrf
                           <td>
-                            <a href="/wp/cetak/{{$d->id_hitung}}" target="_bkank" class="btn btn-success btn-sm"><i class="fa fa-print"></i> Print</a>
-                            @if ($d->pengajuan == null)
-                            <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-upload"></i> Ajukan</a>
+                            <a href="/operator/cetak/{{$d->id_hitung}}" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-eye"></i> Lihat</a>
+                            @if ($d->pengajuan == NULL)
+                            <button href="#" class="btn btn-primary btn-sm">Verifikasi</button>
                              @else
-                            <a class="btn btn-primary">Diajukan</a>
+                            <a class="btn btn-primary" href="#">Verifikasi</a>
                             @endif
                           </td>
                         </tr>

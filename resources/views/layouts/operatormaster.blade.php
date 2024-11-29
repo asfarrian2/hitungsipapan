@@ -65,7 +65,7 @@
                     </ul>
                   </li>
                   <br> <h3>Monitoring</h3> <br>
-                  <li><a href="index.html"><i class="fa fa-line-chart"></i> Cek Pajak</a></li>
+                  <li><a href="/operator/cek/view"><i class="fa fa-line-chart"></i> Cek Pajak</a></li>
                   <br> <h3>OUTPUT</h3> <br>
                   <li><a><i class="fa fa-book"></i> LAPORAN<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">

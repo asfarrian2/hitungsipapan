@@ -90,10 +90,10 @@
             <div class="col-sm-4 invoice-col">
               Perusahaan (Wajib Pajak):
               <address>
-                              <strong>{{Auth::guard('wp')->user()->nama }}</strong>
-                              <br>{{Auth::guard('wp')->user()->alamat }}
+                              <strong>{{$hitung->nama }}</strong>
+                              <br>{{$hitung->alamat }}
                               <br>No. Telepon -
-                              <br>Email: {{Auth::guard('wp')->user()->email }}
+                              <br>Email: {{$hitung->email }}
                           </address>
             </div>
             <!-- /.col -->

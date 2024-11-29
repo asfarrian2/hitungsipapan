@@ -17,6 +17,7 @@ use App\Http\Controllers\KaController;
 use App\Http\Controllers\KdsController;
 use App\Http\Controllers\KpController;
 use App\Http\Controllers\FkpapController;
+use App\Http\Controllers\CekpajakController;
 use App\Models\Uppd;
 use App\Models\User;
 use App\Models\wp;
@@ -167,6 +168,9 @@ Route::middleware(['auth:uppd'])->group(function () {
     Route::get('/operator/objek/{id_objek}/hapus', [ObjekController::class, 'hapus']);
     Route::get('/operator/objek/{id_objek}/edit', [ObjekController::class, 'edit']);
     Route::post('/operator/objek/update', [ObjekController::class, 'update']);
+    //Data Perhitungan
+    Route::get('/operator/cek/view', [CekpajakController::class, 'view']);
+    Route::get('/operator/cetak/{id_objek}', [CekpajakController::class, 'cetak']);
 
 });
 
