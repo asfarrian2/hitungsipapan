@@ -39,7 +39,7 @@
                           <th class="text-center">Volume Pemakaian</th>
                           <th class="text-center">Jumlah Pajak Air Permukaan</th>
                           <th class="text-center">Foto Water Meter</th>
-                          <th class="text-center">Pengajuan</th>
+                          <th class="text-center">Laporan</th>
                           <th class="text-center">Status</th>
                           <th class="text-center">Aksi</th>
                         </tr>
@@ -58,26 +58,26 @@
                           <td>Rp <?php echo number_format($d->jumlah_pap,0,',','.')?></td>
                           <td><img src="{{ url($foto_volume) }}" width="200px" alt=""></td>
                           <td>@if ($d->pengajuan == null)
-                            <a class="btn-warning">Tidak Ada</a>
+                            <a class="btn-warning">Tidak Ada</a><p class="text-size:1px">*Upload Laporan PDF</p>
                              @else
-                            <a class="btn-primary">Diajukan</a>
+                            <a href="/wp/download/{{$d->id_hitung}}" target="_blank"><i class="fa fa-download"></i>Download</a>
                             @endif
                           <td>@if ($d->status == 2)
                             <a class="btn-success">Disetujui</a>
                              @elseif($d->status == 1)
-                            <a class="btn-primary">Diajukan</a>
+                            <a class="btn-warning">Pending</a>
                             @elseif($d->status == 3)
                             <a class="btn-danger">Ditolak</a>
                             @else
-                            <p><a class="btn-warning">Tidak Ada</a><p>
+                            <p><a class="btn-danger">Tidak Ada</a><p>
                             @endif</td>
                           @csrf
                           <td>
-                            <a href="/wp/cetak/{{$d->id_hitung}}" target="_bkank" class="btn btn-success btn-sm"><i class="fa fa-print"></i> Print</a>
+                            <a href="/wp/cetak/{{$d->id_hitung}}" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-print"></i> Print</a>
                             @if ($d->pengajuan == null)
-                            <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-upload"></i> Ajukan</a>
+                            <button href="#" id="upload" ambil_id="{{$d->id_hitung }}" class="btn btn-primary btn-sm"><i class="fa fa-file"></i><p>Upload</p></button>
                              @else
-                            <a class="btn btn-primary">Diajukan</a>
+                            <a class="btn btn-danger text-white"><i class="fa fa-close text-white"></i><p>Batal</p></a>
                             @endif
                           </td>
                         </tr>
@@ -93,9 +93,87 @@
      </div>
    </div>
 </div>
+<!-- Modal Tambah Objek Pajak -->
+<div class="modal modal-blur fade" id="modal-inputobjek" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Faktor Nilai Air Permukaan (FKPAP)</h5>
+                <button type="button" class="fa fa-close close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/wp/upload" method="POST" enctype="multipart/form-data" data-parsley-validate id="frmCabang">
+                    @csrf
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                                <span>ID </span>
+                                <input type="text" name="id_hitung" value="" id="id_hitung_ambil" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-3">
+                                <span>Upload Laporan (*pdf)</span>
+                                <input type="file" accept="application/pdf" name="dokumen" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <button class="btn btn-success w-100" type="submit">
+                                    Upload
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-
-
-
+        </div>
+    </div>
+</div>
 
 @endsection
+
+@push('wpscript')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+$('#batal').click(function(){
+    var id_hitung = $(this).attr('data-id');
+Swal.fire({
+  title: "Apakah Anda Yakin Ingin Mengajukan Hasil Perhitungan PAP Ini ?",
+  text: "Pastikan Data Diisi Benar dan Sesuai",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Ya, Ajukan"
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location = "/wp/ajukan/"+id_hitung
+    Swal.fire({
+      title: "Data Berhasil Ditambah Dipengajuan !",
+      icon: "success"
+    });
+  }
+});
+});
+</script>
+
+<script>
+
+ $("#upload").click(function() {
+    var ambil_id = $(this).attr("ambil_id");
+    $("#id_hitung_ambil").val(ambil_id);
+    $("#modal-inputobjek").modal("show");
+});
+
+
+var span = document.getElementsByClassName("close")[0];
+</script>
+@endpush
+

@@ -193,7 +193,7 @@
                     <td>11</td>
                     <td>FNAP</td>
                     <td>FNAP=SA*LA*LP*VA*KA*KDS*KP</td>
-                    <td>{{$hitung->fnap}}%</td>
+                    <td>{{$cfnap}}%</td>
                   </tr>
                   <tr>
                     <td>12</td>

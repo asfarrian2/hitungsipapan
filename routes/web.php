@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -201,6 +203,9 @@ Route::post('/wp/hitung/{id_objek}', [WpapController::class, 'hitung']);
 Route::get('/wp/hasil/{id_objek}', [WpapController::class, 'hasil']);
 Route::get('/wp/cetak/{id_objek}', [WpapController::class, 'cetak']);
 Route::get('/wp/store', [WpapController::class, 'store']);
+Route::get('/wp/ajukan/{id_hitung}', [WpapController::class, 'ajukan']);
+Route::post('/wp/upload', [WpapController::class, 'upload']);
+Route::get('/wp/download/{id_hitung}', [WpapController::class, 'download']);
 Route::get('/logout_wp', [AuthController::class, 'logout_wp']);
 });
 

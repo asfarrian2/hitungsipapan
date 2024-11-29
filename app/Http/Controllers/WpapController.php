@@ -19,6 +19,8 @@ class WpapController extends Controller
         ->leftJoin('objek_pajak', 'hitung.id_objek', '=', 'objek_pajak.id_objek')
         ->leftJoin('tb_wp', 'objek_pajak.id_wajibpajak', '=', 'tb_wp.id_wajibpajak')
         ->where('hitung.id_wajibpajak',$id_wajibpajak)
+        ->where('status', 1 AND 2 AND 3)
+        ->orderBy('id_hitung', 'DESC')
         ->get();
 
         return view('view_histori', compact('hitung'));
@@ -50,6 +52,12 @@ class WpapController extends Controller
         $id_objek = $request -> id_objek;
         $m3 = $request -> m3;
         $id_wajibpajak = Auth::guard('wp')->user()->id_wajibpajak;
+
+        $id_unit = DB::table('tb_wp')
+        ->where('id_wajibpajak', $id_wajibpajak)
+        ->first();
+
+        $uppd = $id_unit->id_unit;
 
         $objek_pajak = DB::table('objek_pajak')
         ->leftJoin('hdap', 'objek_pajak.id_hdap', '=', 'hdap.id_hdap')
@@ -101,6 +109,7 @@ class WpapController extends Controller
             'id_hitung' => $id,
             'id_objek' => $id_objek,
             'id_wajibpajak' => $id_wajibpajak,
+            'id_unit' => $uppd,
             'status' => 0,
             'foto' => $foto,
             'tanggal' => date('Y-m-d'),
@@ -146,7 +155,10 @@ class WpapController extends Controller
         ->where('hitung.id_hitung',$id_hitung)
         ->first();
 
-        return view('hasil', compact('hitung'));
+        $fnap=$hitung->fnap;
+        $cfnap= $fnap*100;
+
+        return view('hasil', compact('hitung', 'cfnap'));
     }
 
     public function cetak($id_hitung, Request $request){
@@ -169,7 +181,61 @@ class WpapController extends Controller
         ->where('hitung.id_hitung',$id_hitung)
         ->first();
 
-        return view('cetakpap', compact('hitung'));
+        $fnap=$hitung->fnap;
+        $cfnap= $fnap*100;
+
+        return view('cetakpap', compact('hitung', 'cfnap'));
     }
+
+    public function ajukan($id_hitung){
+        $data=[
+            'status' => '1'
+        ];
+
+        $update= DB::table('hitung')
+        ->where('id_hitung', $id_hitung)
+        ->update($data);
+        if ($update){
+        return redirect('/wp/histori')->with(['success' => 'Data Berhasil Diajukan']);
+        }else{
+            echo 'Gagal';
+            }
+        }
+
+        public function upload(Request $request){
+            $id_hitung = $request->id_hitung;
+            $request->validate([
+
+            ]);
+            if ($request->hasFile('dokumen')) {
+                $dokumen = $id_hitung . "." . $request->file('dokumen')->getClientOriginalExtension();
+            } else {
+                $dokumen = $id_hitung;
+            }
+
+            $data=[
+                'pengajuan' => $dokumen
+            ];
+            $update=DB::table('hitung')
+            ->where('id_hitung',$id_hitung)
+            ->update($data);
+            if ($update){
+                if ($request->hasFile('dokumen')) {
+                    $folderPath = "public/uploads/laporan/";
+                    $request->file('dokumen')->storeAs($folderPath, $dokumen);
+                }
+                return redirect('/wp/histori')->with(['success' => 'Dokumen Berhasil Diupload']);
+                }else{
+                    return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
+                }
+        }
+
+        public function download($id_hitung){
+            $path = Storage::path('public/uploads/laporan/'.$id_hitung.'.pdf');
+            if ($path){
+            return response()->file($path);
+            } else
+            abort(404);
+        }
 
 }

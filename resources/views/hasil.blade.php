@@ -157,7 +157,7 @@ function tgl_indo($tanggal){
                                 <td>11</td>
                                 <td>FNAP</td>
                                 <td>FNAP=SA*LA*LP*VA*KA*KDS*KP</td>
-                                <td>{{$hitung->fnap}}%</td>
+                                <td>{{$cfnap}}%</td>
                               </tr>
                               <tr>
                                 <td>12</td>
@@ -221,8 +221,9 @@ function tgl_indo($tanggal){
                       <!-- this row will not appear when printing -->
                       <div class="row no-print">
                         <div class="" style="margin-top:40px">
-                        <a href="/wp/cetak/{{$hitung->id_hitung}}" target="_blank" class="btn btn-success pull-right"><i class="fa fa-print"></i> Print</a>
-
+                        <!-- <a href="/wp/cetak/{{$hitung->id_hitung}}" target="_blank" class="btn btn-success pull-right"><i class="fa fa-print"></i> Print</a> -->
+                        <button href="#" data-id="{{$hitung->id_hitung}}" id="lanjut" class="btn btn-success pull-right"><i class="fa fa-check lanjut"></i> Lanjutkan dan Ajukan</button>
+                        <a href="/wp/home" class="btn btn-dark pull-right"><i class="fa fa-arrow-left"></i> Kembali</a>
                         </div>
                       </div>
                     </section>
@@ -232,4 +233,43 @@ function tgl_indo($tanggal){
             </div>
           </div>
 
+
 @endsection
+
+@push('wpscript')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+$('#lanjut').click(function(){
+    var id_hitung = $(this).attr('data-id');
+Swal.fire({
+  title: "Apakah Anda Yakin Ingin Mengajukan Hasil Perhitungan PAP Ini ?",
+  text: "Pastikan Data Diisi Benar dan Sesuai",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Ya, Ajukan"
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location = "/wp/ajukan/"+id_hitung
+    Swal.fire({
+      title: "Data Berhasil Ditambah Dipengajuan !",
+      icon: "success"
+    });
+  }
+});
+});
+</script>
+
+<script>
+
+ $("#tambah").click(function() {
+    $("#modal-inputobjek").modal("show");
+});
+
+
+var span = document.getElementsByClassName("close")[0];
+</script>
+@endpush
+
