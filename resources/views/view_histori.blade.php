@@ -65,8 +65,9 @@
                             @elseif ($d->pengajuan =! null AND $d->status =! 1)
                             <a href="/wp/download/{{$d->id_hitung}}" class="btn btn-success btn-sm" target="_blank"><i class="fa fa-download"></i>Download</a>
                             @else
-                            <a></a>
-                            @endif
+
+                            @endif</td>
+
                           <td>@if ($d->status == 2)
                             <a class="btn-success text-white">Disetujui</a>
                              @elseif($d->status == 1)
