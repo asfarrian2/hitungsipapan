@@ -34,6 +34,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
     <!-- Custom Theme Style -->
     <link href="/gentella/build/css/custom.min.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/wp/img/logoutama.png">
@@ -57,21 +58,18 @@
               <div class="menu_section">
                 <h3>HOME</h3>
                 <ul class="nav side-menu">
-                  <li><a href="/admin/dashboard"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+                  <li><a href="/operator/dashboard"><i class="fa fa-dashboard"></i>Dashboard</a></li>
                   <br> <h3>MASTER</h3> <br>
                   <li><a><i class="fa fa-tasks"></i> Data <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="/operator/wp/view">Perusahaan</a></li>
                     </ul>
                   </li>
+                  <br> <h3>Calculator</h3> <br>
+                  <li><a href="/operator/hitung"><i class="fa fa-calculator"></i> Hitung Pajak PAP</a>
+                  </li>
                   <br> <h3>Monitoring</h3> <br>
                   <li><a href="/operator/cek/view"><i class="fa fa-line-chart"></i> Cek Pajak</a></li>
-                  <br> <h3>OUTPUT</h3> <br>
-                  <li><a><i class="fa fa-book"></i> LAPORAN<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="chartjs.html">Rekap Cek PAP</a></li>
-                    </ul>
-                  </li>
                 </ul>
               </div>
 

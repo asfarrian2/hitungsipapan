@@ -19,6 +19,7 @@ class CekpajakController extends Controller
         ->leftJoin('tb_wp', 'objek_pajak.id_wajibpajak', '=', 'tb_wp.id_wajibpajak')
         ->where('hitung.id_unit',$id_unit)
         ->whereNotNull('hitung.pengajuan')
+        ->orderBy('id_hitung', 'DESC')
         ->get();
 
         return view('operator.objek.view_histori', compact('hitung'));
@@ -79,6 +80,134 @@ class CekpajakController extends Controller
                 return Redirect::back()->with(['warning' => 'Verifikasi Gagal Dibatalkan']);
             }
     }
+
+    public function hitung(){
+        $perusahaan=DB::table('tb_wp')->get();
+        $objek=DB::table('objek_pajak')->get();
+
+        return view('operator.objek.hitung', compact('perusahaan', 'objek'));
+
+    }
+
+    public function getobjek($id_wajibpajak){
+        $objek = DB::table('objek_pajak')
+        ->where('id_wajibpajak', $id_wajibpajak)
+        ->get();
+        return response()->json($objek);
+    }
+
+
+    public function convert(Request $request){
+
+        $id_objek = $request -> objek;
+        $m3 = $request -> m3;
+        $id_wajibpajak = $request -> perusahaan;
+
+        $id_unit = DB::table('tb_wp')
+        ->where('id_wajibpajak', $id_wajibpajak)
+        ->first();
+
+        $uppd = $id_unit->id_unit;
+
+        $objek_pajak = DB::table('objek_pajak')
+        ->leftJoin('hdap', 'objek_pajak.id_hdap', '=', 'hdap.id_hdap')
+        ->leftJoin('few', 'objek_pajak.id_few', '=', 'few.id_few')
+        ->leftJoin('sa', 'objek_pajak.id_sa', '=', 'sa.id_sa')
+        ->leftJoin('la', 'objek_pajak.id_la', '=', 'la.id_la')
+        ->leftJoin('lp', 'objek_pajak.id_lp', '=', 'lp.id_lp')
+        ->leftJoin('va', 'objek_pajak.id_va', '=', 'va.id_va')
+        ->leftJoin('ka', 'objek_pajak.id_ka', '=', 'ka.id_ka')
+        ->leftJoin('kds', 'objek_pajak.id_kds', '=', 'kds.id_kds')
+        ->leftJoin('kp', 'objek_pajak.id_kp', '=', 'kp.id_kp')
+        ->leftJoin('fkpap', 'objek_pajak.id_fkpap', '=', 'fkpap.id_fkpap')
+        ->leftJoin('tb_wp', 'objek_pajak.id_wajibpajak', '=', 'tb_wp.id_wajibpajak')
+        ->leftJoin('tb_uppd', 'tb_wp.id_unit', '=', 'tb_uppd.id_unit')
+        ->where('id_objek',$id_objek)
+        ->first();
+
+        // RUMUS
+        $fnap  = $objek_pajak->fnap;
+        $jumlah_fnap = $fnap*100;
+        $tarif = '0.1'; //100%
+        $npap  = $objek_pajak->npap;
+        $hasil = $tarif*$npap*$m3;
+
+        //ID Hitung
+        $hitung=DB::table('hitung')
+        ->latest('id_hitung', 'DESC')
+        ->first();
+
+        $kodehitung ="HT";
+
+        if($hitung == null){
+            $nomorurut = "0000000000001";
+        }else{
+            $nomorurut = substr($hitung->id_hitung, 2, 13) + 1;
+            $nomorurut = str_pad($nomorurut, 13, "0", STR_PAD_LEFT);
+        }
+        $id=$kodehitung.$nomorurut;
+        $request->validate([
+            'foto' => 'image'
+        ]);
+        if ($request->hasFile('foto')) {
+            $foto = $id . "." . $request->file('foto')->getClientOriginalExtension();
+        } else {
+            $foto = null;
+        }
+
+        $data=[
+            'id_hitung' => $id,
+            'id_objek' => $id_objek,
+            'id_wajibpajak' => $id_wajibpajak,
+            'id_unit' => $uppd,
+            'status' => 0,
+            'foto' => $foto,
+            'tanggal' => date('Y-m-d'),
+            'volume_pemakaian' => $m3,
+            'jumlah_pap' => $hasil
+
+        ];
+        $insert=DB::table('hitung')->insert($data);
+        $ambilfoto = DB::table('hitung')
+        ->where('id_hitung', $id)
+        ->first();
+        if ($insert){
+            if ($request->hasFile('foto')) {
+                $folderPath = "public/uploads/hitung/";
+                $request->file('foto')->storeAs($folderPath, $foto);
+            }
+            return redirect('/operator/hasil/'.$id);
+            }else{
+                return Redirect::back()->with(['warning' => 'Data Gagal Disimpan']);
+            }
+
+    }
+
+    public function hasil($id_hitung, Request $request){
+
+        $hitung = DB::table('hitung')
+        ->leftJoin('tb_wp', 'hitung.id_wajibpajak', '=', 'tb_wp.id_wajibpajak')
+        ->leftJoin('tb_uppd', 'tb_wp.id_unit', '=', 'tb_uppd.id_unit')
+        ->leftJoin('objek_pajak', 'hitung.id_objek', '=', 'objek_pajak.id_objek')
+        ->leftJoin('hdap', 'objek_pajak.id_hdap', '=', 'hdap.id_hdap')
+        ->leftJoin('few', 'objek_pajak.id_few', '=', 'few.id_few')
+        ->leftJoin('sa', 'objek_pajak.id_sa', '=', 'sa.id_sa')
+        ->leftJoin('la', 'objek_pajak.id_la', '=', 'la.id_la')
+        ->leftJoin('lp', 'objek_pajak.id_lp', '=', 'lp.id_lp')
+        ->leftJoin('va', 'objek_pajak.id_va', '=', 'va.id_va')
+        ->leftJoin('ka', 'objek_pajak.id_ka', '=', 'ka.id_ka')
+        ->leftJoin('kds', 'objek_pajak.id_kds', '=', 'kds.id_kds')
+        ->leftJoin('kp', 'objek_pajak.id_kp', '=', 'kp.id_kp')
+        ->leftJoin('fkpap', 'objek_pajak.id_fkpap', '=', 'fkpap.id_fkpap')
+        ->where('hitung.id_hitung',$id_hitung)
+        ->first();
+
+        $fnap=$hitung->fnap;
+        $cfnap= $fnap*100;
+
+        return view('operator.objek.hasil', compact('hitung', 'cfnap'));
+    }
+
 
 
 

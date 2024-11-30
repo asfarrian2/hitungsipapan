@@ -176,6 +176,12 @@ Route::middleware(['auth:uppd'])->group(function () {
     Route::get('/operator/download/{id_hitung}', [WpapController::class, 'download']);
     Route::post('/operator/verifikasi', [CekpajakController::class, 'verifikasi']);
     Route::get('/operator/cancel/{id_hitung}', [CekpajakController::class, 'cancel']);
+    //Calculator
+    Route::get('/operator/hitung', [CekpajakController::class, 'hitung']);
+    Route::get('/objek/{id_wajibpajak}', [CekpajakController::class, 'getobjek']);
+    Route::post('/operator/convert', [CekpajakController::class, 'convert']);
+    Route::get('/operator/hasil/{id_objek}', [CekpajakController::class, 'hasil']);
+
 
 });
 
