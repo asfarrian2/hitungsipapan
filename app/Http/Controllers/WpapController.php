@@ -152,6 +152,7 @@ class WpapController extends Controller
         ->leftJoin('kp', 'objek_pajak.id_kp', '=', 'kp.id_kp')
         ->leftJoin('fkpap', 'objek_pajak.id_fkpap', '=', 'fkpap.id_fkpap')
         ->where('hitung.id_hitung',$id_hitung)
+        ->whereNot('hitung.status', '0')
         ->first();
 
         $fnap=$hitung->fnap;
