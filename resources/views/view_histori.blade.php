@@ -107,8 +107,6 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="input-icon mb-3">
-                            <!-- <span><b>{{$d->id_hitung}}</b></span><br>
-                                <span><b>{{$d->nama}}</b> | Objek PAP <b>{{$d->nama_objek}}</b>: <b>{{$d->volume_pemakaian}}</b> M3 <b>Rp <?php echo number_format($d->jumlah_pap,0,',','.')?></b></span> -->
                                 <input type="hidden" name="id_hitung" value="" id="id_hitung_ambil" class="form-control" required>
                             </div>
                         </div>
