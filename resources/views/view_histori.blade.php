@@ -77,7 +77,7 @@
                             @if ($d->pengajuan =! NULL && $d->status == 1)
                              <a class="batal" href="#" data-id="{{ $d->id_hitung }}" title="Batalkan Pengajuan dan Hapus File Laporan*pdf"><i class="batal fa fa-close text-succsess btn btn-danger btn-sm" ></i></a>
                              @else
-                             <p><a class="btn-danger">Tidak Ada</a><p>
+
                              @endif
                           </td>
                         </tr>
