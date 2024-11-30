@@ -5,8 +5,8 @@
         <meta charset="utf-8">
         <title>Hitung SIPAPAN</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="" name="keywords">
-        <meta content="" name="description">
+        <meta content="Fitur SIPAPAN Perhitungan PAP" name="keywords">
+        <meta content="Cek dan Hitung Pajak Air Permukaan Perusahaan Anda Secara Otomatis Disini" name="description">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
