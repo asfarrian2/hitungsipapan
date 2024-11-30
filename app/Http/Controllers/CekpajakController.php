@@ -18,7 +18,7 @@ class CekpajakController extends Controller
         ->leftJoin('objek_pajak', 'hitung.id_objek', '=', 'objek_pajak.id_objek')
         ->leftJoin('tb_wp', 'objek_pajak.id_wajibpajak', '=', 'tb_wp.id_wajibpajak')
         ->where('hitung.id_unit',$id_unit)
-        ->whereNotNull('hitung.pengajuan')
+        ->whereNot('hitung.status', '0')
         ->orderBy('id_hitung', 'DESC')
         ->get();
 

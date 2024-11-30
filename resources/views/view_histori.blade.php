@@ -58,7 +58,7 @@
                           <td>Rp <?php echo number_format($d->jumlah_pap,0,',','.')?></td>
                           <td><img src="{{ url($foto_volume) }}" width="200px" alt=""></td>
                           <td>@if ($d->pengajuan == null)
-                            <a class="btn-warning">Tidak Ada</a><p class="text-size:1px">*Upload Laporan PDF</p>
+                          <a class="upload" href="#" data-id="{{ $d->id_hitung }}" title="Upload Laporan *pdf"><i class="upload fa fa-upload text-succsess btn btn-primary btn btn-sm" ></i>Upload *PDF</a>
                              @else
                             <a href="/wp/download/{{$d->id_hitung}}" class="btn btn-success btn-sm" target="_blank"><i class="fa fa-download"></i>Download</a>
                             @endif
@@ -75,7 +75,7 @@
                           <td>
                             <a href="/wp/cetak/{{$d->id_hitung}}" target="_blank" title="Print Hasil Perhitungan"><i class="fa fa-print tn btn-success btn btn-sm"></i></a>
                             @if ($d->status == 0)
-                            <a class="upload" href="#" data-id="{{ $d->id_hitung }}" title="Upload Laporan *pdf"><i class="upload fa fa-upload text-succsess btn btn-primary btn btn-sm" ></i></a>
+
                              @elseif ($d->status == 1)
                              <a class="batal" href="#" data-id="{{ $d->id_hitung }}" title="Batalkan Pengajuan dan Hapus File Laporan*pdf"><i class="batal fa fa-close text-succsess btn btn-danger btn-sm" ></i></a>
                              @endif
