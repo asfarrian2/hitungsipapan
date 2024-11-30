@@ -60,7 +60,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Foto Water Meter
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-                                                <input type="file" accept="image/*" id="fileuploadInput" name="foto" class="form-control" required="required">
+                                                <input type="file" accept="image/*" capture="environtment" id="fileuploadInput" name="foto" class="form-control" required="required">
                                                 </input>
 											</div>
 										</div>
