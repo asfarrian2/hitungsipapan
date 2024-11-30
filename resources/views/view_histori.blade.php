@@ -64,6 +64,7 @@
                             <a class="upload2" href="#" data-id="{{ $d->id_hitung }}" title="Upload Laporan *pdf"><i class="upload fa fa-upload text-succsess btn btn-danger btn btn-sm" ></i>Upload Ulang *PDF</a>
                             @elseif ($d->pengajuan =! null AND $d->status =! 1)
                             <a href="/wp/download/{{$d->id_hitung}}" class="btn btn-success btn-sm" target="_blank"><i class="fa fa-download"></i>Download</a>
+                            @else
                             @endif
                           <td>@if ($d->status == 2)
                             <a class="btn-success text-white">Disetujui</a>
