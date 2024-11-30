@@ -213,6 +213,13 @@ class WpapController extends Controller
                 $dokumen = $id_hitung;
             }
 
+            $data2=[
+                'pengajuan' => NULL
+            ];
+            $update1=DB::table('hitung')
+            ->where('id_hitung',$id_hitung)
+            ->update($data2);
+
             $data=[
                 'pengajuan' => $dokumen,
                 'status'    => 1

@@ -57,9 +57,12 @@
                           <td>{{ $d->volume_pemakaian }} M3</td>
                           <td>Rp <?php echo number_format($d->jumlah_pap,0,',','.')?></td>
                           <td><img src="{{ url($foto_volume) }}" width="200px" alt=""></td>
-                          <td>@if ($d->pengajuan == null)
+                          <td>@if ($d->pengajuan == null AND $d->status == 1)
                           <a class="upload" href="#" data-id="{{ $d->id_hitung }}" title="Upload Laporan *pdf"><i class="upload fa fa-upload text-succsess btn btn-primary btn btn-sm" ></i>Upload *PDF</a>
-                             @else
+                             @elseif ($d->pengajuan =! null AND $d->status == 1)
+                            <a href="/wp/download/{{$d->id_hitung}}" class="btn btn-success btn-sm" target="_blank"><i class="fa fa-download"></i>Download</a>
+                            <a class="upload2" href="#" data-id="{{ $d->id_hitung }}" title="Upload Laporan *pdf"><i class="upload fa fa-upload text-succsess btn btn-danger btn btn-sm" ></i>Upload Ulang *PDF</a>
+                            @else
                             <a href="/wp/download/{{$d->id_hitung}}" class="btn btn-success btn-sm" target="_blank"><i class="fa fa-download"></i>Download</a>
                             @endif
                           <td>@if ($d->status == 2)
@@ -74,6 +77,11 @@
                           @csrf
                           <td>
                             <a href="/wp/cetak/{{$d->id_hitung}}" target="_blank" title="Print Hasil Perhitungan"><i class="fa fa-print tn btn-success btn btn-sm"></i></a>
+                            @if ($d->pengajuan =! NULL && $d->status == 1)
+                             <a class="batal" href="#" data-id="{{ $d->id_hitung }}" title="Batalkan Pengajuan dan Hapus File Laporan*pdf"><i class="batal fa fa-close text-succsess btn btn-danger btn-sm" ></i></a>
+                             @else
+
+                             @endif
                           </td>
                         </tr>
                         @endforeach
@@ -159,6 +167,18 @@ Swal.fire({
 <script>
 
  $(".upload").click(function() {
+    var ambil_id = $(this).attr("data-id");
+    $("#id_hitung_ambil").val(ambil_id);
+    $("#modal-inputobjek").modal("show");
+});
+
+
+var span = document.getElementsByClassName("close")[0];
+</script>
+
+<script>
+
+ $(".upload2").click(function() {
     var ambil_id = $(this).attr("data-id");
     $("#id_hitung_ambil").val(ambil_id);
     $("#modal-inputobjek").modal("show");
