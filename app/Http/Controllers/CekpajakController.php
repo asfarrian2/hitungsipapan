@@ -82,12 +82,14 @@ class CekpajakController extends Controller
     }
 
     public function hitung(){
-        $perusahaan=DB::table('tb_wp')->get();
+        $id_unit = Auth::guard('uppd')->user()->id_unit;
+        $perusahaan=DB::table('tb_wp')->where('id_unit',$id_unit)->get();
         $objek=DB::table('objek_pajak')->get();
 
         return view('operator.objek.hitung', compact('perusahaan', 'objek'));
 
     }
+
 
     public function getobjek($id_wajibpajak){
         $objek = DB::table('objek_pajak')
