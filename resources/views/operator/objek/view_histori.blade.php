@@ -40,7 +40,6 @@
                           <th class="text-center">Volume Pemakaian</th>
                           <th class="text-center">Jumlah Pajak Air Permukaan</th>
                           <th class="text-center">Foto Water Meter</th>
-                          <th class="text-center">Laporan</th>
                           <th class="text-center">Status</th>
                           <th class="text-center">Aksi</th>
                         </tr>
@@ -59,11 +58,6 @@
                           <td>{{ $d->volume_pemakaian }} M3</td>
                           <td>Rp <?php echo number_format($d->jumlah_pap,0,',','.')?></td>
                           <td><img src="{{ url($foto_volume) }}" width="200px" alt=""></td>
-                          <td>@if ($d->pengajuan == null)
-                            <a class="btn-warning">Tidak Ada</a>
-                             @else
-                             <a href="/operator/download/{{$d->id_hitung}}" class="btn btn-success btn-sm" target="_blank"><i class="fa fa-download"></i>Download</a>
-                             @endif
                           <td>@if ($d->status == 2)
                             <a class="btn-success text-white">Disetujui</a>
                              @elseif($d->status == 1)
