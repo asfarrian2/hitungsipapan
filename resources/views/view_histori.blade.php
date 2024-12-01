@@ -69,7 +69,7 @@
                           <td>
                             <a href="/wp/cetak/{{$d->id_hitung}}" target="_blank" title="Print Hasil Perhitungan"><i class="fa fa-print tn btn-success btn btn-sm"></i></a>
                             @if ($d->pengajuan =! NULL && $d->status == 1)
-                             <a class="batal" href="#" data-id="{{ $d->id_hitung }}" title="Batalkan Pengajuan dan Hapus File Laporan*pdf"><i class="batal fa fa-close text-succsess btn btn-danger btn-sm" ></i></a>
+                             <a class="batal" href="#" data-id="{{ $d->id_hitung }}" title="Batalkan Pengajuan"><i class="batal fa fa-close text-succsess btn btn-danger btn-sm" ></i></a>
                              @else
 
                              @endif
